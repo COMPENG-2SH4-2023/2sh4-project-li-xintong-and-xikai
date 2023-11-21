@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MacUILib.h"
 #include "objPos.h"
+#include "GameMechs.h"
 
 
 using namespace std;
@@ -20,9 +21,7 @@ void CleanUp(void);
 
 int main(void)
 {
-
     Initialize();
-
     while(exitFlag == false)  
     {
         GetInput();
@@ -30,9 +29,7 @@ int main(void)
         DrawScreen();
         LoopDelay();
     }
-
     CleanUp();
-
 }
 
 
@@ -40,13 +37,14 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-
     exitFlag = false;
 }
 
 void GetInput(void)
 {
-   
+   if(MacUILib_hasChar){
+        char temp_input = MacUILib_getChar();
+   }
 }
 
 void RunLogic(void)

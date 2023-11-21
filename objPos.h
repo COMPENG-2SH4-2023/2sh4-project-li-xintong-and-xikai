@@ -8,9 +8,9 @@ class objPos
         int y;
         char symbol;
 
-        objPos();
+        objPos(); //DECLARE 
         objPos(objPos &o); // copy constructor
-        objPos(int xPos, int yPos, char sym);
+        objPos(int xPos, int yPos, char sym); //alll obj characteristic
 
         void setObjPos(objPos o);        
         void setObjPos(int xPos, int yPos, char sym);  
