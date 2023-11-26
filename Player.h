@@ -24,11 +24,12 @@ class Player
         void movePlayer();
 
     private:
-        objPos playerPos;   // Upgrade this in iteration 3.       
-        enum Dir myDir;
+        objPos playerPos;   // with player position and character of player   
+        enum Dir myDir;     //the direction dimensition 
 
         // Need a reference to the Main Game Mechanisms
-        GameMechs* mainGameMechsRef;
+        GameMechs* mainGameMechsRef; //包含着在程序运行中与其它的交互
+        //主程序mainfunction 必须要与mainGameMechRef 交互
 };
 
 #endif

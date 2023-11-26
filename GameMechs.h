@@ -21,6 +21,8 @@ class GameMechs
     private:
         char input;
         bool exitFlag;
+        bool loseflag;
+        int score;
         
         int boardSizeX;
         int boardSizeY;
@@ -28,18 +30,25 @@ class GameMechs
     public:
         GameMechs();
         GameMechs(int boardX, int boardY);
+        ~GameMechs();
         
         bool getExitFlagStatus();
         void setExitTrue();
 
+        bool getloseflagStatus();
+        void setloseflagTrue();
+
         char getInput();
         void setInput(char this_input);
+
         void clearInput();
 
         int getBoardSizeX();
         int getBoardSizeY();
-      
 
+        void generatefood();
+
+    
 };
 
 #endif

@@ -49,13 +49,14 @@ void GetInput(void)
 
 void RunLogic(void)
 {
+    objPos *player; //manually delete the heap
     
+
 }
 
 void DrawScreen(void)
 {
     MacUILib_clearScreen();    
-
 }
 
 void LoopDelay(void)
@@ -67,6 +68,5 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     MacUILib_clearScreen();    
-  
     MacUILib_uninit();
 }

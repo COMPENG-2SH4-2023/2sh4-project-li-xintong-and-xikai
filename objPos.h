@@ -1,5 +1,7 @@
 #ifndef OBJPOS_H
 #define OBJPOS_H
+using namespace std;
+#include<iostream>
 
 class objPos
 {
@@ -9,7 +11,7 @@ class objPos
         char symbol;
 
         objPos(); //DECLARE 
-        objPos(objPos &o); // copy constructor
+        objPos(objPos &o); // copy constructor //require a deep copy
         objPos(int xPos, int yPos, char sym); //alll obj characteristic
 
         void setObjPos(objPos o);        
