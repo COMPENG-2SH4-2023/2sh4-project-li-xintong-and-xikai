@@ -9,6 +9,20 @@ objPosArrayList::objPosArrayList(){
     aList= new objPos [ARRAY_MAX_CAP];
     
 }
+
+objPosArrayList::objPosArrayList(int sList,int sArray){
+    sizeList=sList;
+    sizeArray=sArray;
+    aList=new objPos [sizeArray];
+
+}
+
+objPosArrayList::objPosArrayList(const objPosArrayList &ArrayList){
+    sizeList=ArrayList.sizeList;
+    sizeArray=ArrayList.sizeArray;
+    aList=new objPos [ArrayList.sizeArray];
+
+}
 objPosArrayList::~objPosArrayList(){
     
     delete [] aList;
