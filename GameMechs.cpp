@@ -72,7 +72,27 @@ void GameMechs::setInput(char this_input)
 
 void GameMechs::clearInput()
 {
-    input = NULL;
+    input ='\0';
 }
+
+void GameMechs::generatefood(objPos blockOff)
+{
+    do
+    {
+        foodPos.x=rand()%(boardSizeX-2)+1;
+        foodPos.y=rand()%(boardSizeY-2)+1;
+        foodPos.symbol='@';
+    }
+    while(foodPos.x==blockOff.x&&foodPos.y==blockOff.y);
+    
+}
+
+void GameMechs::getFoodPos(objPos &returnPos)
+{
+    returnPos.x=foodPos.x;
+    returnPos.y=foodPos.y;
+    returnPos.symbol=foodPos.symbol;
+}
+
 
 
