@@ -1,4 +1,6 @@
 #include "GameMechs.h"
+#define DEFAULT_SIZEX 30
+#define DEFAULT_SIZEY 15
 
 GameMechs::GameMechs()
 {
@@ -6,18 +8,21 @@ GameMechs::GameMechs()
     score = 0;
     exitFlag = false;
     loseflag = false;
-    boardSizeX = 30;
-    boardSizeY = 15;
+    boardSizeX = DEFAULT_SIZEX;
+    boardSizeY = DEFAULT_SIZEX;
 }
 
 GameMechs::GameMechs(int boardX, int boardY) //used as a setter
 {
-    input = 0;
-    score = 0;
-    exitFlag = false;
-    loseflag = false;
-    boardSizeX = boardX;
-    boardSizeY = boardY;
+    
+    boardSizeX=boardX;
+    boardSizeY=boardY;
+    if(boardX<=0){
+        boardSizeX=DEFAULT_SIZEX;
+    }
+    if(boardY<=0){
+        boardSizeY=DEFAULT_SIZEY;
+    }
 }
 
 // do you need a destructor?
@@ -69,7 +74,7 @@ void GameMechs::setInput(char this_input)
 
 void GameMechs::clearInput()
 {
-    input = NULL;
+    input = '\n';
 }
 
 

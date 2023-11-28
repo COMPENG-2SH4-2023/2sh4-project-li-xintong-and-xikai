@@ -47,8 +47,6 @@ class GameMechs
         int getBoardSizeY();
 
         void generatefood();
-
-    
 };
 
 #endif

@@ -8,7 +8,7 @@ Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct fu
     playerPos.symbol = '*';
     myDir = STOP;
     // more actions to be included
-    mainGameMechsRef = thisGMRef;
+    mainGameMechsRef = thisGMRef;  //debug 
 }
 
 Player::~Player()
@@ -26,7 +26,7 @@ void Player::getPlayerPos(objPos &returnPos) //the snake head location, always p
 
 void Player::updatePlayerDir() // CONNECTED WITH THE PLAY FUNCTION FIXED 
 {
-    if(mainGameMechsRef->getInput() != NULL){//check the mainGamemechref weather have neo content
+    if(mainGameMechsRef->getInput() != '\n'){//check the mainGamemechref weather have neo content
         char p_temp = mainGameMechsRef -> getInput(); // pass the reference     
         if(p_temp == (('w') || ('W'))&&(myDir != DOWN)){
             myDir = UP;
@@ -52,7 +52,7 @@ void Player::movePlayer() //fixed
 {
     //myDir from input of analysitic 
 
-    switch(myDir != STOP){
+    switch(myDir){
         case UP:
             playerPos.y--;
             if(playerPos.y == 0){
@@ -76,6 +76,8 @@ void Player::movePlayer() //fixed
             if(playerPos.x == 30){
                 playerPos.x = 1;
             }
+            break;
+        case STOP:
             break;
     }
     // PPA3 Finite State Machine logic
