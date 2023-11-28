@@ -1,54 +1,107 @@
 #include "objPosArrayList.h"
+#include<iostream>
 
-// Check lecture contents on general purpose array list construction, 
-// and modify it to support objPos array list construction.
+using namespace std;
 
-objPosArrayList::objPosArrayList()
-{
-
-}
-
-objPosArrayList::~objPosArrayList()
-{
-
-}
-
-int objPosArrayList::getSize()
-{
-
-}
-
-void objPosArrayList::insertHead(objPos thisPos)
-{
-
-}
-
-void objPosArrayList::insertTail(objPos thisPos)
-{
-
-}
-
-void objPosArrayList::removeHead()
-{
+objPosArrayList::objPosArrayList(){
+    sizeList = 0;
+    sizeArray = ARRAY_MAX_CAP;
+    aList= new objPos [ARRAY_MAX_CAP];
     
 }
 
-void objPosArrayList::removeTail()
-{
+objPosArrayList::objPosArrayList(int sList,int sArray){
+    sizeList=sList;
+    sizeArray=sArray;
+    aList=new objPos [sizeArray];
 
 }
 
-void objPosArrayList::getHeadElement(objPos &returnPos)
-{
+objPosArrayList::objPosArrayList(const objPosArrayList &ArrayList){
+    sizeList=ArrayList.sizeList;
+    sizeArray=ArrayList.sizeArray;
+    aList=new objPos [ArrayList.sizeArray];
 
 }
+objPosArrayList::~objPosArrayList(){
+    
+    delete [] aList;
 
-void objPosArrayList::getTailElement(objPos &returnPos)
-{
+
 
 }
+int objPosArrayList::getSize(){
+    return sizeList;
 
-void objPosArrayList::getElement(objPos &returnPos, int index)
-{
+}
+void objPosArrayList::insertHead(objPos thisPos){
+    if(sizeList==sizeArray)
+    {
+        return;
+    }
+    
+    for(int i=sizeList; i>0; i--)
+    {
+        aList[i]=aList[i-1];
+    }
+    aList[0].x= thisPos.x;
+    aList[0].y= thisPos.y;
+    aList[0].symbol=thisPos.symbol;
+    sizeList++;
+    
+}
+void objPosArrayList::insertTail(objPos thisPos){
+    if(sizeList==sizeArray)
+    {
+        return;
+    }
+ 
 
+    aList[sizeList].x= thisPos.x;
+    aList[sizeList].y= thisPos.y;
+    aList[sizeList].symbol=thisPos.symbol;
+    sizeList++;
+}
+void objPosArrayList::removeHead(){
+    if(sizeList==0)
+    {
+        return;
+    }
+    for(int i=1;i<sizeList;i++)
+    {
+        aList[i-1]=aList[i];
+    }
+    sizeList--;
+    
+
+}
+void objPosArrayList::removeTail(){
+    if(sizeList==0)
+    {
+        return;
+    }
+    sizeList--;
+
+
+}
+void objPosArrayList::getHeadElement(objPos &returnPos){
+    returnPos.symbol=aList[0].symbol;
+    returnPos.x=aList[0].x;
+    returnPos.y=aList[0].y;
+    
+
+
+}
+void objPosArrayList::getTailElement(objPos &returnPos){
+    returnPos.symbol=aList[sizeList-1].symbol;
+    returnPos.x=aList[sizeList-1].x;
+    returnPos.y=aList[sizeList-1].y;
+
+
+
+}
+void objPosArrayList::getElement(objPos &returnPos, int index){
+    returnPos.symbol=aList[index].symbol;
+    returnPos.x=aList[index].x;
+    returnPos.y=aList[index].y;
 }

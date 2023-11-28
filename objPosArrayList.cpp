@@ -4,7 +4,7 @@
 using namespace std;
 
 objPosArrayList::objPosArrayList(){
-    sizeList = ARRAY_MAX_CAP;
+    sizeList =0;
     sizeArray = ARRAY_MAX_CAP;
     aList= new objPos [ARRAY_MAX_CAP];
     
