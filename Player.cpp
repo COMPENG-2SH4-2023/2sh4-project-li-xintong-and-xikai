@@ -70,53 +70,52 @@ void Player::movePlayer() //fixed  //fixed
 {
     //myDir from input of analysitic 
     switch(myDir){
-        objPos *a;
-        a = new objPos();
-        playerPosList -> getHeadElement(a);
+        objPos* a = new objPos(); 
+        playerPosList -> getHeadElement(*a);
 
         case UP:
-            playerPosList -> getElement(a,0);
+            //playerPosList -> getElement(a,0);
             a -> y--;
-            if(a.y == 0){
-                a.y = (mainGameMechsRef -> getBoardSizeY()) - 1;
+            if(a -> y == 0){
+                a-> y = (mainGameMechsRef -> getBoardSizeY()) - 1;
             }            
-            playerPosList -> insertHead(a);
+            playerPosList -> insertHead(*a);
 
             if((playerPosList -> getSize())!= snake_length){
                 playerPosList -> removeTail();
             }
             break;
         case DOWN:
-            objPos b;
-            playerPosList -> getElement(b,0);
-            b.y=b.y++;
-            if(b.y == mainGameMechsRef->getBoardSizeY()){
-                b.y = 1;
+            //objPos b;
+            //playerPosList -> getElement(b,0);
+            a -> y++;
+            if(a -> y == mainGameMechsRef->getBoardSizeY()){
+                a -> y = 1;
             }
-            playerPosList -> insertHead(b);
+            playerPosList -> insertHead(*a);
             if((playerPosList -> getSize()) != snake_length){
                 playerPosList -> removeTail();
             }
             break;
         case LEFT:
-            objPos c;
-            playerPosList -> getElement(c,0);
-            c.x=c.x--;
-            playerPosList -> insertHead(c);
-            if(c.x == 0){
-                c.x = (mainGameMechsRef -> getBoardSizeX()) - 1;
+            //objPos c;
+            //playerPosList -> getElement(c,0);
+            a -> x--;
+            playerPosList -> insertHead(*a);
+            if(a -> x == 0){
+                a -> x = (mainGameMechsRef -> getBoardSizeX()) - 1;
             }
             if((playerPosList -> getSize()) != snake_length){
                 playerPosList -> removeTail();
             }
             break;
         case RIGHT:
-            objPos d;
-            playerPosList -> getElement(d,0);
-            d.y=d.x++;
-            playerPosList -> insertHead(d);
-            if(d.x == mainGameMechsRef->getBoardSizeX()){
-                d.x = 1;
+            //objPos d;
+            //playerPosList -> getElement(d,0);
+            a -> x++;
+            playerPosList -> insertHead(*a);
+            if(a -> x == mainGameMechsRef->getBoardSizeX()){
+                a -> x = 1;
             }
             if((playerPosList -> getSize()) != snake_length){
                 playerPosList -> removeTail();
