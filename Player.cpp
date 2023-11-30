@@ -8,10 +8,9 @@ Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct fu
     // more actions to be included
     int a=5;
     playerPosList = new objPosArrayList(a,ARRAY_MAX_CAP);
-    
-    playerPosList.aList->x = (thisGMRef->getBoardSizeX())/2 ;
-    playerPosList.aList->y = (thisGMRef->getBoardSizeY())/2 ;
-    playerPosList.aList->symbol = '*';
+    objPos TEMP;
+    TEMP.setObjPos(thisGMRef->getBoardSizeX(),thisGMRef->getBoardSizeY(),'*'); //init 赋给头的特性，中场开始
+    playerPosList[0].insertHead(TEMP);
     mainGameMechsRef = thisGMRef;
 }
 
@@ -25,12 +24,14 @@ Player::~Player()
 void Player::getPlayerPos(objPosArrayList &returnPosList) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.
 {
     int a=playerPosList->getSize();
-    returnPosList=new objPosArrayList(a,ARRAY_MAX_CAP);
-    for(int i=0; i<sizeList; i++)
-    {
-        returnPosList[i].aList->x = playerPosList[i].aList->x;
-        returnPosList[i].aList->y = playerPosList[i].aList->y;
-        returnPosList[i].aList->symbol = playerPosList[i].aList->symbol;
+    //returnPosList=new objPosArrayList(a,ARRAY_MAX_CAP);
+    for(int i=0; (i < playerPosList -> getSize()); i++)
+    {   
+        objPos a;
+        playerPosList->getElement(a,i);
+        returnPosList.insertTail(a);
+        //returnPosList[i].aList->y = playerPosList[i].aList->y;
+        //returnPosList[i].aList->symbol = playerPosList[i].aList->symbol;
     }
     // return the reference to the playerPos array list
 }
@@ -69,6 +70,7 @@ void Player::movePlayer() //fixed  //fixed
     //myDir from input of analysitic 
     switch(myDir){
         case UP:
+
             playerPosList[0].aList->y--;
             if(playerPosList[0].aList->y == 0){
                 playerPosList[0].aList->y = (mainGameMechsRef -> getBoardSizeY()) - 1;
