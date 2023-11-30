@@ -19,10 +19,11 @@ class GameMechs
     // You will include more data members and member functions to complete your design.
 
     private:
-        char input;
-        bool exitFlag;
-        bool loseflag;
-        int score;
+        objPos foodPos; //self_generated
+        char input; //stock
+        bool exitFlag; //stock
+        bool loseflag; //stock
+        int score; //stock
         
         int boardSizeX;
         int boardSizeY;
@@ -30,6 +31,7 @@ class GameMechs
     public:
         GameMechs();
         GameMechs(int boardX, int boardY);
+        GameMechs(GameMechs* clip_board);
         ~GameMechs();
         
         bool getExitFlagStatus();
@@ -46,7 +48,9 @@ class GameMechs
         int getBoardSizeX();
         int getBoardSizeY();
 
-        void generatefood();
+        void generatefood(objPos blockoff);
+        void getFoodPos(objPos &blockoff); //pass by reference, eventhough the block itself do not have the characteristic of the pointers/.
+
 };
 
 #endif
