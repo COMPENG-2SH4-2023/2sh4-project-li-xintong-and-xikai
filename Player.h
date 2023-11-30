@@ -9,7 +9,6 @@ class Player
 {
     public:
         enum Dir {UP, DOWN, LEFT, RIGHT, STOP};  // This is the direction state
-        Player(); //init condition of the player
         Player(GameMechs* thisGMRef); 
         ~Player(); //used for snake !
 

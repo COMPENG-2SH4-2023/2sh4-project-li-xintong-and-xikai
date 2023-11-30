@@ -17,13 +17,9 @@ void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
 void CleanUp(void);
-///*
+GameMechs *a;
 Player *thisplayer;
-objPos a;
-objPos comp;
-GameMechs thisgm;
-//creat is able to creat all through the main environment
-//*/
+
 int main(void)
 {
     Initialize();
@@ -39,27 +35,24 @@ int main(void)
 
 
 void Initialize(void)
-{
-    MacUILib_init();
-    MacUILib_clearScreen();
-    exitFlag = false;
-    a.setObjPos(5,5,'*');
-    thisplayer -> getPlayerPos(a);
+{   
+    a = new GameMechs(30,15); //creat a new heap using class initialization
+    thisplayer = new Player(a); 
+    
     
 }
 
 void GetInput(void)
 {
    if(MacUILib_hasChar()){
-        char temp_input = MacUILib_getChar();
-        thisgm.setInput(temp_input);
-        thisplayer->updatePlayerDir();
+        a -> setInput(MacUILib_getChar());
+        thisplayer -> updatePlayerDir();
    }
 }
 
 void RunLogic(void)
 {
-    
+    thisplayer -> movePlayer();
     
 
 }
@@ -68,6 +61,7 @@ void DrawScreen(void)
 {
     for(int y = 0; y < 16; y++){
         for(int x = 0; x < 31; x++){
+            objPos comp;
             thisplayer -> getPlayerPos(comp);
             int a = comp.x;
             int b = comp.y;
@@ -93,7 +87,7 @@ void DrawScreen(void)
 
 void LoopDelay(void)
 {
-    MacUILib_Delay(500000); // 0.1s delay //DELAY_CONST
+    MacUILib_Delay(DELAY_CONST); // 0.1s delay //DELAY_CONST
 }
 
 

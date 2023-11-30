@@ -26,9 +26,6 @@ objPosArrayList::objPosArrayList(const objPosArrayList &ArrayList){
 objPosArrayList::~objPosArrayList(){
     
     delete [] aList;
-
-
-
 }
 int objPosArrayList::getSize(){
     return sizeList;

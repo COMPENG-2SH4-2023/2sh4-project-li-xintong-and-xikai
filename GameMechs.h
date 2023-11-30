@@ -12,11 +12,6 @@ using namespace std;
 
 class GameMechs
 {
-    // Construct the remaining declaration from the project manual.
-
-    // Only some sample members are included here
-
-    // You will include more data members and member functions to complete your design.
 
     private:
         objPos foodPos; //self_generated
@@ -46,7 +41,9 @@ class GameMechs
         void clearInput();
 
         int getBoardSizeX();
+        void setBoardSizeX(int x);
         int getBoardSizeY();
+        void setBoardSizeY(int y);
 
         void generatefood(objPos blockoff);
         void getFoodPos(objPos &blockoff); //pass by reference, eventhough the block itself do not have the characteristic of the pointers/.

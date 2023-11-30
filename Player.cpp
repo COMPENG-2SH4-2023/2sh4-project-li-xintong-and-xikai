@@ -3,62 +3,61 @@
 
 Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct function //can been seen as the initial construct function
 {
-
-    playerPos.x = thisGMRef -> getBoardSizeX();
-    playerPos.y = thisGMRef -> getBoardSizeY();
-    playerPos.symbol = '*';
     myDir = STOP;
     // more actions to be included
-
-    mainGameMechsRef = thisGMRef;  //debug 
+    playerPos.x = (thisGMRef->getBoardSizeX())/2 ;
+    playerPos.y = (thisGMRef->getBoardSizeY())/2 ;
+    playerPos.symbol = '*';
+    mainGameMechsRef = thisGMRef;
 }
 
 Player::~Player()
 {   
-    delete mainGameMechsRef; //only thing include private that might required to delete. //only thing include private that might required to delete.
+    //delete mainGameMechsRef; //only thing include private that might required to delete. //only thing include private that might required to delete.
     // delete any heap members here
 }
 
 void Player::getPlayerPos(objPos &returnPos) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.
 {
-    returnPos.x = playerPos.x; //intergrate with both ability
-    returnPos.y = playerPos.y; //deep copy direct pass the value to the 
+    returnPos.x = playerPos.x;
+    returnPos.y = playerPos.y;
+    returnPos.symbol = playerPos.symbol;
     // return the reference to the playerPos array list
 }
 
 void Player::updatePlayerDir() // CONNECTED WITH THE PLAY FUNCTION FIXED 
 {
-    if(mainGameMechsRef->getInput() != '\0'){//check the mainGamemechref weather have neo content
-        char p_temp = mainGameMechsRef -> getInput(); // pass the reference     
-        if(p_temp == (('w') || ('W'))&&(myDir != DOWN)){
-            myDir = UP;
-        }
-        else if(p_temp == (('s') || ('S'))&&(myDir != UP)){
-            myDir = DOWN;
-        }
-        else if(p_temp == (('a') || ('A'))&&(myDir != RIGHT)){
-            myDir = LEFT;
-        }
-        else if(p_temp == (('d') || ('D'))&&(myDir != LEFT)){
-            myDir = RIGHT;
-        }
-        else if(p_temp == (('t') || ('T'))){
-            myDir = STOP;
-        }
-        //p_temp = '\0';     // CLEAR 
-
-    }
-    //myDir == NULL; // CLEAR 
-    //myDir == NULL; // CLEAR 
-    // PPA3 input processing logic        
+    char input = mainGameMechsRef -> getInput();
+    switch(input)
+    {
+        case 'W':
+        case 'w':
+            if(myDir != DOWN && myDir != UP)
+                myDir = UP;
+            break;
+        case 'A':
+        case 'a':
+            if(myDir != RIGHT && myDir != LEFT)
+                myDir = LEFT;
+            break;
+        case 'S':
+        case 's':
+            if(myDir != DOWN && myDir != UP)
+                myDir = DOWN;
+            break;
+        case 'D':
+        case 'd':
+            if(myDir != RIGHT && myDir != LEFT)
+                myDir = RIGHT;
+            break;
+    } 
+    mainGameMechsRef -> clearInput();       
 }
 
 void Player::movePlayer() //fixed  //fixed 
 {
-    printf("this unit has been called");
     //myDir from input of analysitic 
-
-    switch(myDir != STOP){
+    switch(myDir){
         case UP:
             playerPos.y--;
             if(playerPos.y == 0){
@@ -67,19 +66,19 @@ void Player::movePlayer() //fixed  //fixed
             break;
         case DOWN:
             playerPos.y++;
-            if(playerPos.y == 15){
+            if(playerPos.y == (mainGameMechsRef -> getBoardSizeY())){
                 playerPos.y = 1;
             }
             break;
         case LEFT:
             playerPos.x--;
             if(playerPos.x == 0){
-                playerPos.x = 29;
+                playerPos.x = (mainGameMechsRef -> getBoardSizeX()) - 1;
             }
             break;
         case RIGHT:
             playerPos.x++;
-            if(playerPos.x == 30){
+            if(playerPos.x == (mainGameMechsRef -> getBoardSizeX())){
                 playerPos.x = 1;
             }
             break;
