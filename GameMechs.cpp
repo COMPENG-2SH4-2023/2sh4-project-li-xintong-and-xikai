@@ -82,6 +82,11 @@ void GameMechs::setloseflagTrue()
 {
     loseflag = true;
 }
+void GameMechs::causeExitTrue(){
+    if(input == 'f'){
+        setExitTrue(); //call this funciton
+    }
+}
 
 void GameMechs::setInput(char this_input)
 {

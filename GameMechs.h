@@ -31,6 +31,7 @@ class GameMechs
         
         bool getExitFlagStatus();
         void setExitTrue();
+        void causeExitTrue();
 
         bool getloseflagStatus();
         void setloseflagTrue();
@@ -44,6 +45,9 @@ class GameMechs
         void setBoardSizeX(int x);
         int getBoardSizeY();
         void setBoardSizeY(int y);
+
+        void scoreup();
+        void scoredown();
 
         void generatefood(objPos blockoff);
         void getFoodPos(objPos &blockoff); //pass by reference, eventhough the block itself do not have the characteristic of the pointers/.

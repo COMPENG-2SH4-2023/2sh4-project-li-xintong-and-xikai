@@ -4,7 +4,6 @@
 #include "GameMechs.h"
 #include "Player.h"
 
-
 using namespace std;
 
 #define DELAY_CONST 100000
@@ -17,13 +16,13 @@ void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
 void CleanUp(void);
-GameMechs *a;
+GameMechs *thisgm;
 Player *thisplayer;
 
 int main(void)
 {
     Initialize();
-    while(exitFlag == false)  
+    while(thisgm -> getExitFlagStatus() == false)  
     {
         GetInput();
         RunLogic();
@@ -36,8 +35,8 @@ int main(void)
 
 void Initialize(void)
 {   
-    a = new GameMechs(30,15); //creat a new heap using class initialization
-    thisplayer = new Player(a); 
+    thisgm = new GameMechs(30,15); //creat a new heap using class initialization
+    thisplayer = new Player(thisgm); 
     
     
 }
@@ -45,7 +44,8 @@ void Initialize(void)
 void GetInput(void)
 {
    if(MacUILib_hasChar()){
-        a -> setInput(MacUILib_getChar());
+        thisgm -> setInput(MacUILib_getChar());
+        thisgm -> causeExitTrue(); //class funciton required calling! 
         thisplayer -> updatePlayerDir();
    }
 }
@@ -92,7 +92,9 @@ void LoopDelay(void)
 
 
 void CleanUp(void)
-{
+{   
+    delete thisplayer;
+    delete thisgm;  
     MacUILib_clearScreen();    
     MacUILib_uninit();
 }
