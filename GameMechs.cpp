@@ -59,18 +59,10 @@ int GameMechs::getBoardSizeX()
     return boardSizeX;
 }
 
-void GameMechs::setBoardSizeX(int x)
-{
-    boardSizeX = x;
-}
 
 int GameMechs::getBoardSizeY()
 {
     return boardSizeY;
-}
-void GameMechs::setBoardSizeY(int y)
-{
-    boardSizeY = y;
 }
 
 void GameMechs::setExitTrue()

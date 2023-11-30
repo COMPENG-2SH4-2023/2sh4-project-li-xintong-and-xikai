@@ -42,9 +42,7 @@ class GameMechs
         void clearInput();
 
         int getBoardSizeX();
-        void setBoardSizeX(int x);
         int getBoardSizeY();
-        void setBoardSizeY(int y);
 
         void scoreup();
         void scoredown();
