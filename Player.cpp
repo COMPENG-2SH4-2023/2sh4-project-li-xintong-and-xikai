@@ -70,28 +70,51 @@ void Player::movePlayer() //fixed  //fixed
     //myDir from input of analysitic 
     switch(myDir){
         case UP:
-
-            playerPosList[0].aList->y--;
-            if(playerPosList[0].aList->y == 0){
+            objPos a;
+            getElement(&a,0);
+            a.y=a.y--;
+            playerPosList -> insertHead(a);
+            if(playerPosList.aList->y == 0){
                 playerPosList[0].aList->y = (mainGameMechsRef -> getBoardSizeY()) - 1;
+            }
+            if((playerPosList -> getSize())!= mainGameMechsRef -> getSize()){
+                playerPosList -> removeTail();
             }
             break;
         case DOWN:
-            playerPosList[0].aList->y++;
-            if(playerPosList[0].aList->y == (mainGameMechsRef -> getBoardSizeY())){
-                playerPosList[0].aList->y= 1;
+            objPos a;
+            getElement(&a,0);
+            a.y=a.y++;
+            playerPosList -> insertHead(a);
+            if(playerPosList.aList->y == mainGameMechsRef->getBoardSizeY()){
+                playerPosList[0].aList->y = 1;
+            }
+            if((playerPosList -> getSize())!= mainGameMechsRef -> getSize()){
+                playerPosList -> removeTail();
             }
             break;
         case LEFT:
-            playerPosList[0]->aList->x--;
-            if(playerPosList[0]->aList->x == 0){
-                playerPosList[0]->aList->x = (mainGameMechsRef -> getBoardSizeX()) - 1;
+            objPos a;
+            getElement(&a,0);
+            a.x=a.x--;
+            playerPosList -> insertHead(a);
+            if(playerPosList.aList->x == 0){
+                playerPosList[0].aList->x = (mainGameMechsRef -> getBoardSizeX()) - 1;
+            }
+            if((playerPosList -> getSize())!= mainGameMechsRef -> getSize()){
+                playerPosList -> removeTail();
             }
             break;
         case RIGHT:
-            playerPosList[0].aList->x++;
-            if(playerPosList[0].aList->x == (mainGameMechsRef -> getBoardSizeX())){
+            objPos a;
+            getElement(&a,0);
+            a.y=a.x++;
+            playerPosList -> insertHead(a);
+            if(playerPosList.aList->x == mainGameMechsRef->getBoardSizeX()){
                 playerPosList[0].aList->x = 1;
+            }
+            if((playerPosList -> getSize())!= mainGameMechsRef -> getSize()){
+                playerPosList -> removeTail();
             }
             break;
     }
