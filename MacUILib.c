@@ -1,4 +1,5 @@
 #include "MacUILib.h"
+#include <unistd.h>//new addon
 
 print_ptr MacUILib_printf;
 
@@ -21,7 +22,7 @@ print_ptr MacUILib_printf;
 	{
 		usleep(usec);
 	}
-	
+
 	int MacUILib_hasChar(void)
 	{
 		return _kbhit();

@@ -4,25 +4,35 @@
 
 GameMechs::GameMechs()
 {
-    boardSizeX= DEFAULT_SIZEX;
-    boardSizeY= DEFAULT_SIZEY;
+    input = 0;
+    score = 0;
+    exitFlag = false;
+    loseflag = false;
+    boardSizeX = DEFAULT_SIZEX;
+    boardSizeY = DEFAULT_SIZEX;
 }
 
-GameMechs::GameMechs(int boardX, int boardY) //used as a setter
+GameMechs::GameMechs(int boardX, int boardY)
 {
-    
-    boardSizeX=boardX;
-    boardSizeY=boardY;
-    if(boardX<=0){
+    boardSizeX = boardX;
+    boardSizeY = boardY;
+    if(boardX <= 0){
+        boardSizeX = DEFAULT_SIZEX;
+    }
+    if(boardY <= 0){
+        boardSizeY = DEFAULT_SIZEY;
+    }
+}
+GameMechs::GameMechs(GameMechs* clip_board){ //deep copy
+    boardSizeX = clip_board->boardSizeX;
+    boardSizeY = clip_board->boardSizeY;
+    if(clip_board->boardSizeX<=0){
         boardSizeX=DEFAULT_SIZEX;
     }
-    if(boardY<=0){
+    if(clip_board->boardSizeY<=0){
         boardSizeY=DEFAULT_SIZEY;
-    }
-
-    
+    }   
 }
-
 // do you need a destructor?
 GameMechs::~GameMechs(){
     
@@ -49,11 +59,19 @@ int GameMechs::getBoardSizeX()
     return boardSizeX;
 }
 
+void GameMechs::setBoardSizeX(int x)
+{
+    boardSizeX = x;
+}
+
 int GameMechs::getBoardSizeY()
 {
     return boardSizeY;
 }
-
+void GameMechs::setBoardSizeY(int y)
+{
+    boardSizeY = y;
+}
 
 void GameMechs::setExitTrue()
 {
@@ -63,6 +81,11 @@ void GameMechs::setExitTrue()
 void GameMechs::setloseflagTrue()
 {
     loseflag = true;
+}
+void GameMechs::causeExitTrue(){
+    if(input == 'f'){
+        setExitTrue(); //call this funciton
+    }
 }
 
 void GameMechs::setInput(char this_input)
@@ -93,6 +116,4 @@ void GameMechs::getFoodPos(objPos &returnPos)
     returnPos.y=foodPos.y;
     returnPos.symbol=foodPos.symbol;
 }
-
-
 
