@@ -24,7 +24,7 @@ class Player
         void movePlayer();
 
     private:
-        objPos playerPos;   // with player position and character of player   
+        objPosArrayList* playerPosList;   // with player position and character of player   
         enum Dir myDir;     //the direction dimensition 
 
         // Need a reference to the Main Game Mechanisms
