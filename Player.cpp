@@ -1,13 +1,17 @@
 #include "Player.h"
 #include "MacUILib.h"
+#include "objPosArrayList.h"
 
 Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct function //can been seen as the initial construct function
 {
     myDir = STOP;
     // more actions to be included
-    playerPos.x = (thisGMRef->getBoardSizeX())/2 ;
-    playerPos.y = (thisGMRef->getBoardSizeY())/2 ;
-    playerPos.symbol = '*';
+    int a=5;
+    playerPosList = new objPosArrayList(a,ARRAY_MAX_CAP);
+    
+    playerPosList.aList->x = (thisGMRef->getBoardSizeX())/2 ;
+    playerPosList.aList->y = (thisGMRef->getBoardSizeY())/2 ;
+    playerPosList.aList->symbol = '*';
     mainGameMechsRef = thisGMRef;
 }
 
@@ -15,13 +19,19 @@ Player::~Player()
 {   
     //delete mainGameMechsRef; //only thing include private that might required to delete. //only thing include private that might required to delete.
     // delete any heap members here
+    delete [] playerPosList;
 }
 
-void Player::getPlayerPos(objPos &returnPos) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.
+void Player::getPlayerPos(objPosArrayList &returnPosList) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.
 {
-    returnPos.x = playerPos.x;
-    returnPos.y = playerPos.y;
-    returnPos.symbol = playerPos.symbol;
+    int a=playerPosList->getSize();
+    returnPosList=new objPosArrayList(a,ARRAY_MAX_CAP);
+    for(int i=0; i<sizeList; i++)
+    {
+        returnPosList[i].aList->x = playerPosList[i].aList->x;
+        returnPosList[i].aList->y = playerPosList[i].aList->y;
+        returnPosList[i].aList->symbol = playerPosList[i].aList->symbol;
+    }
     // return the reference to the playerPos array list
 }
 
@@ -59,27 +69,27 @@ void Player::movePlayer() //fixed  //fixed
     //myDir from input of analysitic 
     switch(myDir){
         case UP:
-            playerPos.y--;
-            if(playerPos.y == 0){
-                playerPos.y = (mainGameMechsRef -> getBoardSizeY()) - 1;
+            playerPosList[0].aList->y--;
+            if(playerPosList[0].aList->y == 0){
+                playerPosList[0].aList->y = (mainGameMechsRef -> getBoardSizeY()) - 1;
             }
             break;
         case DOWN:
-            playerPos.y++;
-            if(playerPos.y == (mainGameMechsRef -> getBoardSizeY())){
-                playerPos.y = 1;
+            playerPosList[0].aList->y++;
+            if(playerPosList[0].aList->y == (mainGameMechsRef -> getBoardSizeY())){
+                playerPosList[0].aList->y= 1;
             }
             break;
         case LEFT:
-            playerPos.x--;
-            if(playerPos.x == 0){
-                playerPos.x = (mainGameMechsRef -> getBoardSizeX()) - 1;
+            playerPosList[0]->aList->x--;
+            if(playerPosList[0]->aList->x == 0){
+                playerPosList[0]->aList->x = (mainGameMechsRef -> getBoardSizeX()) - 1;
             }
             break;
         case RIGHT:
-            playerPos.x++;
-            if(playerPos.x == (mainGameMechsRef -> getBoardSizeX())){
-                playerPos.x = 1;
+            playerPosList[0].aList->x++;
+            if(playerPosList[0].aList->x == (mainGameMechsRef -> getBoardSizeX())){
+                playerPosList[0].aList->x = 1;
             }
             break;
     }

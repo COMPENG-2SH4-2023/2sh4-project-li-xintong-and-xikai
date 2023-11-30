@@ -12,7 +12,7 @@ class Player
         Player(GameMechs* thisGMRef); 
         ~Player(); //used for snake !
 
-        void getPlayerPos(objPos &returnPos); // Upgrade this in iteration 3.
+        void getPlayerPos(objPosArrayList &returnPosList); // Upgrade this in iteration 3.
         void updatePlayerDir(); //FSM
         void movePlayer();//
 
