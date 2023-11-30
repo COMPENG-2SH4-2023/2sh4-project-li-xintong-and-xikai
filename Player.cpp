@@ -69,10 +69,11 @@ void Player::updatePlayerDir() // CONNECTED WITH THE PLAY FUNCTION FIXED
 void Player::movePlayer() //fixed  //fixed 
 {
     //myDir from input of analysitic 
-    switch(myDir){
-        objPos* a = new objPos(); 
-        playerPosList -> getHeadElement(*a);
+    objPos* a = new objPos(); 
+    playerPosList -> getHeadElement(*a);
 
+    switch(myDir){
+        
         case UP:
             //playerPosList -> getElement(a,0);
             a -> y--;

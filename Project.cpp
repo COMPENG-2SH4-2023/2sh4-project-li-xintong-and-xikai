@@ -61,11 +61,11 @@ void DrawScreen(void)
 {
     for(int y = 0; y < 16; y++){
         for(int x = 0; x < 31; x++){
-            objPos comp;
-            thisplayer -> getPlayerPos(comp);
-            int a = comp.x;
-            int b = comp.y;
-            char c = comp.symbol;
+            objPos *comp = new objPos();
+             /*thisplayer -> getPlayerPos(*comp);
+            int a = comp->x;
+            int b = comp->y;
+            char c = comp->symbol;
             if(x == 0 || x == 30){
                 printf("#");
             }
@@ -79,7 +79,8 @@ void DrawScreen(void)
                 printf(" ");
             }
         }
-        printf("\n");
+        printf("\n");*/
+        }
     }
 
     MacUILib_clearScreen();    
