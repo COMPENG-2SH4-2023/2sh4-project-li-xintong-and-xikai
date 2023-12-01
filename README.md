@@ -7,6 +7,6 @@ You must watch the briefing video and read through the manual to engage in the d
 
 Section: [L09]
 
-MacID: [li2441]
+MacID: [li2441][xu503]
 
-StudentID: [400460804]
+StudentID: [400460804][400440917]
