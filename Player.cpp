@@ -2,6 +2,8 @@
 #include "MacUILib.h"
 #include "objPosArrayList.h"
 #include "Food.h"
+#include "objPos.h"
+#include "GameMechs.h"
 
 Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct function //can been seen as the initial construct function
 {
@@ -122,5 +124,28 @@ void Player::movePlayer() //fixed  //fixed
 
 bool Player::checkfoodconsumption()
 {
+    objPos *a;
+    a=new objPos();
+    getFoodPos(a);
 
+    if(isPosEqual(a))
+    {
+        increasePlayerLength();
+        scoreup();
+    }
+    generatefood(30,15);
+
+
+
+
+}
+
+void Player::increasePlayerLength()
+{
+    playerPosList.insertTail();
+}
+
+bool Player::checkselfcollision()
+{
+    
 }

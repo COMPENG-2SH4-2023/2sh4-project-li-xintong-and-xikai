@@ -5,6 +5,8 @@
 #include "objPos.h"
 #include "objPosArrayList.h"
 #include "Food.h"
+#include "objPos.h"
+#include "GameMechs.h"
 
 class Player
 {
