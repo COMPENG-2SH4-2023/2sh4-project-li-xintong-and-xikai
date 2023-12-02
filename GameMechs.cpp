@@ -69,3 +69,14 @@ void GameMechs::clearInput()
 {
     input ='\0';
 }
+
+int GameMechs::getscore(){
+    return score;
+}
+
+void GameMechs::scoreup(){
+    score++;
+}
+void GameMechs::scoredown(){
+    score--;
+}

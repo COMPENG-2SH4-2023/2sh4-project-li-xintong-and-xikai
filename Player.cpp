@@ -25,7 +25,7 @@ Player::~Player()
 
 void Player::getPlayerPos(objPosArrayList &returnPosList) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.
 {
-    int a=playerPosList->getSize();
+    int a = playerPosList->getSize();
     //returnPosList=new objPosArrayList(a,ARRAY_MAX_CAP);
     for(int i=0; (i < playerPosList -> getSize()); i++)
     {   
@@ -67,7 +67,7 @@ void Player::updatePlayerDir() // CONNECTED WITH THE PLAY FUNCTION FIXED
     mainGameMechsRef -> clearInput();       
 }
 
-void Player::movePlayer() //fixed  //fixed 
+void Player::movePlayer(objPosArrayList *food_list) //fixed  //fixed 
 {
     //myDir from input of analysitic 
     objPos* a = new objPos(); 
@@ -82,8 +82,9 @@ void Player::movePlayer() //fixed  //fixed
                 a-> y = (mainGameMechsRef -> getBoardSizeY()) - 1;
             }            
             playerPosList -> insertHead(*a);
+            if(!checkfoodconsumption(food_list)){
             playerPosList -> removeTail();
-
+            }
             break;
         case DOWN:
             //objPos b;
@@ -93,8 +94,9 @@ void Player::movePlayer() //fixed  //fixed
                 a -> y = 1;
             }
             playerPosList -> insertHead(*a);
+            if(!checkfoodconsumption(food_list)){
             playerPosList -> removeTail();
-
+            }
             break;
         case LEFT:
             //objPos c;
@@ -105,7 +107,9 @@ void Player::movePlayer() //fixed  //fixed
                 a -> x = (mainGameMechsRef -> getBoardSizeX()) - 1;
             }
             playerPosList -> insertHead(*a);
+            if(!checkfoodconsumption(food_list)){
             playerPosList -> removeTail();
+            }
             break;
         case RIGHT:
             a -> x++;
@@ -114,7 +118,9 @@ void Player::movePlayer() //fixed  //fixed
                 a -> x = 1;
             }
             playerPosList -> insertHead(*a);
+            if(!checkfoodconsumption(food_list)){
             playerPosList -> removeTail();
+            }
             break;
     }
     // PPA3 Finite State Machine logic
@@ -122,30 +128,42 @@ void Player::movePlayer() //fixed  //fixed
 
 }
 
-bool Player::checkfoodconsumption()
+bool Player::checkfoodconsumption(objPosArrayList *food_list)
 {
-    objPos *a;
-    a=new objPos();
-    getFoodPos(a);
-
-    if(isPosEqual(a))
-    {
-        increasePlayerLength();
-        scoreup();
+    objPos *a = new objPos();
+    objPos *b = new objPos();
+    playerPosList -> getHeadElement(*b);
+    int comsumption=0;
+    for(int i = 0; i < 5 ; i++){
+        food_list -> getElement(*a,i);
+        
+        if(b -> isPosEqual(a))
+        {
+            mainGameMechsRef -> scoreup(); 
+            comsumption=1;
+        }
     }
-    generatefood(30,15);
-
-
-
-
+    delete a,b;
+    if(comsumption==1)
+    {
+        comsumption = 0;
+        return true;
+    }
+    else{
+        return false;
+    }
 }
-
-void Player::increasePlayerLength()
-{
-    playerPosList.insertTail();
-}
-
 bool Player::checkselfcollision()
 {
-    
+    int a = playerPosList ->getSize();
+    objPos *checkbody = new objPos();
+    objPos *head = new objPos();
+    playerPosList ->getHeadElement(*head);
+    for(int i = 1; i < a; i++){
+        playerPosList ->getElement(*checkbody,i);
+        if(head ->isPosEqual(checkbody)){
+            mainGameMechsRef -> setloseflagTrue();
+            mainGameMechsRef -> setExitTrue();
+        }
+    }
 }

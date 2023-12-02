@@ -78,8 +78,6 @@ void objPosArrayList::removeTail(){
         return;
     }
     sizeList--;
-
-
 }
 void objPosArrayList::getHeadElement(objPos &returnPos){
     returnPos.symbol=aList[0].symbol;
@@ -101,4 +99,28 @@ void objPosArrayList::getElement(objPos &returnPos, int index){
     returnPos.symbol=aList[index].symbol;
     returnPos.x=aList[index].x;
     returnPos.y=aList[index].y;
+}
+
+int objPosArrayList::getHeadx(){
+    return aList[0].x;
+}
+
+int objPosArrayList::getHeady(){
+    return aList[0].y;
+}
+int objPosArrayList::getTailx(){
+    return aList[sizeList].x;
+}
+int objPosArrayList::getTaily(){
+    return aList[sizeList].y;
+}
+
+bool objPosArrayList::detect_to_print(int x, int y){
+
+    for(int z = 0 ; z < sizeList ; z++){   
+        if(aList[z].x == x && aList[z].y == y){
+            return true;
+        }
+    }
+    return false;
 }

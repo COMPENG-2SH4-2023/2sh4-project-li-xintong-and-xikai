@@ -43,6 +43,7 @@ class GameMechs
 
         void scoreup();
         void scoredown();
+        int getscore();
 };
 
 #endif

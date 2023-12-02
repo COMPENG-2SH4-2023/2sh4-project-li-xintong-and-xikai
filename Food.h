@@ -19,5 +19,6 @@ class Food{
         ~Food();
         void generatefood(int x, int y);//inside maingamemech!
         void getFoodPos(objPos &returnPos);
+        void getFoodbucket(objPosArrayList* Food_list);
 };
 #endif

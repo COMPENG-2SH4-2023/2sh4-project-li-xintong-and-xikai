@@ -28,6 +28,17 @@ class objPosArrayList
         void getHeadElement(objPos &returnPos);
         void getTailElement(objPos &returnPos);
         void getElement(objPos &returnPos, int index);
+
+        //return the head x
+        int getHeadx();
+        //return the head y
+        int getHeady(); 
+
+        int getTailx();
+
+        int getTaily();
+
+        bool detect_to_print(int x, int y);
 };
 
 #endif

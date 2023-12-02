@@ -17,15 +17,16 @@ void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
 void CleanUp(void);
+objPos pplayer;
 GameMechs *thisgm; //initial the gamemech
 Player *thisplayer; //initial the player, the operation will cross the game
 Food *foodBucket; //initial the food
-objPosArrayList *print_list; //initial for print statement
+objPosArrayList *player_list, *food_list; //initial for print statement
 
 int main(void)
 {
     Initialize();
-    while((thisgm -> getExitFlagStatus() == false) && (thisgm -> getloseflagStatus() == false))  //both elect on operator
+    while(thisgm -> getExitFlagStatus())  //both elect on operator
     {
         GetInput();
         RunLogic();
@@ -40,8 +41,10 @@ void Initialize(void)
 {   
     thisgm = new GameMechs(30,15); //creat a new heap using class initialization
     thisplayer = new Player(thisgm);
-    print_list = new objPosArrayList();
+    player_list = new objPosArrayList();
     foodBucket = new Food(thisgm);
+    foodBucket ->getFoodbucket(food_list);
+
 }
 
 void GetInput(void)
@@ -55,18 +58,16 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    
+    thisplayer ->getPlayerPos(*player_list);
+    MacUILib_clearScreen();
     if(thisgm ->getInput() == 'f'){
         thisgm ->setExitTrue();
     }
-    thisplayer -> movePlayer();
-    
-    
+    thisplayer -> movePlayer(food_list);
 }
 
 void DrawScreen(void)
 {
-    thisplayer -> getPlayerPos(*print_list);  
     for(int y = 0; y < 16; y++){
         for(int x = 0; x < 31; x++){
             if(x == 0 || x == 30){
@@ -75,7 +76,9 @@ void DrawScreen(void)
             else if (y == 0 || y == 15){
                 printf("#");
             }
-            
+            else if(player_list ->detect_to_print(x,y)){
+                printf("*");
+            }
             else{
                 printf(" ");
             }
@@ -83,7 +86,6 @@ void DrawScreen(void)
         printf("\n");
     }
 
-    MacUILib_clearScreen();    
 }
 
 void LoopDelay(void)
@@ -94,8 +96,12 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {   
+    MacUILib_clearScreen();
     delete thisplayer;
-    delete thisgm;  
-    MacUILib_clearScreen();    
+    delete thisgm;     
     MacUILib_uninit();
+    if(thisgm ->getloseflagStatus()){
+        MacUILib_printf("ahahha loser!!!!!!!");
+    }
+    MacUILib_printf("your final score is %d",thisgm ->getscore());
 }
