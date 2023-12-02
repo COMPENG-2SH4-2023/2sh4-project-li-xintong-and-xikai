@@ -4,6 +4,7 @@
 #include "GameMechs.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
+#include "Food.h"
 
 class Player
 {
@@ -15,6 +16,10 @@ class Player
         void getPlayerPos(objPosArrayList &returnPosList); // Upgrade this in iteration 3.
         void updatePlayerDir(); //FSM
         void movePlayer();//class
+
+        bool checkfoodconsumption();
+        void increasePlayerLength();
+        bool checkselfcollision();
 
     private:
         objPosArrayList* playerPosList;   // with player position and character of player   

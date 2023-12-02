@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "MacUILib.h"
 #include "objPosArrayList.h"
+#include "Food.h"
 
 Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct function //can been seen as the initial construct function
 {
@@ -115,4 +116,11 @@ void Player::movePlayer() //fixed  //fixed
             break;
     }
     // PPA3 Finite State Machine logic
+
+
+}
+
+bool Player::checkfoodconsumption()
+{
+
 }

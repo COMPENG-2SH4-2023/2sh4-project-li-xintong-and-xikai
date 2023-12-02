@@ -61,6 +61,7 @@ void RunLogic(void)
     }
     thisplayer -> movePlayer();
     
+    
 }
 
 void DrawScreen(void)
