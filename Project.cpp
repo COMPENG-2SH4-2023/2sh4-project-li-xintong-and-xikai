@@ -47,13 +47,16 @@ void GetInput(void)
 {
    if(MacUILib_hasChar()){
         thisgm -> setInput(MacUILib_getChar());
-        thisgm -> causeExitTrue(); //class funciton required calling! 
+        
         thisplayer -> updatePlayerDir();
    }
 }
 
 void RunLogic(void)
 {
+    if(thisgm ->getInput() == 'f'){
+        thisgm ->setExitTrue();
+    }
     thisplayer -> movePlayer();
     
 }
@@ -70,11 +73,7 @@ void DrawScreen(void)
             else if (y == 0 || y == 15){
                 printf("#");
             }
-            else if (x == obj_for_print -> x && y == obj_for_print -> y){
-                for (int z = 0; z < print_list ->getSize(); z++){
-                   MacUILib_printf("%c",obj_for_print -> getSymbol());
-                }
-            }
+            
             else{
                 printf(" ");
             }

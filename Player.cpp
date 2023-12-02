@@ -5,14 +5,12 @@
 Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct function //can been seen as the initial construct function
 {
     myDir = STOP;
-    // more actions to be included
-    int a = 1;
-    playerPosList = new objPosArrayList(a,ARRAY_MAX_CAP);
+    int init_length = 1;
+    playerPosList = new objPosArrayList(init_length,ARRAY_MAX_CAP);
     objPos TEMP;
     TEMP.setObjPos(thisGMRef->getBoardSizeX(),thisGMRef->getBoardSizeY(),'*'); //init 赋给头的特性，中场开始
     playerPosList[0].insertHead(TEMP);
     mainGameMechsRef = thisGMRef;
-    snake_length = 1;
 }
 
 Player::~Player()
@@ -81,10 +79,8 @@ void Player::movePlayer() //fixed  //fixed
                 a-> y = (mainGameMechsRef -> getBoardSizeY()) - 1;
             }            
             playerPosList -> insertHead(*a);
+            playerPosList -> removeTail();
 
-            if((playerPosList -> getSize())!= snake_length){
-                playerPosList -> removeTail();
-            }
             break;
         case DOWN:
             //objPos b;
@@ -94,40 +90,29 @@ void Player::movePlayer() //fixed  //fixed
                 a -> y = 1;
             }
             playerPosList -> insertHead(*a);
-            if((playerPosList -> getSize()) != snake_length){
-                playerPosList -> removeTail();
-            }
+            playerPosList -> removeTail();
+
             break;
         case LEFT:
             //objPos c;
             //playerPosList -> getElement(c,0);
             a -> x--;
-            playerPosList -> insertHead(*a);
+            
             if(a -> x == 0){
                 a -> x = (mainGameMechsRef -> getBoardSizeX()) - 1;
             }
-            if((playerPosList -> getSize()) != snake_length){
-                playerPosList -> removeTail();
-            }
+            playerPosList -> insertHead(*a);
+            playerPosList -> removeTail();
             break;
         case RIGHT:
-            //objPos d;
-            //playerPosList -> getElement(d,0);
             a -> x++;
-            playerPosList -> insertHead(*a);
+            
             if(a -> x == mainGameMechsRef->getBoardSizeX()){
                 a -> x = 1;
             }
-            if((playerPosList -> getSize()) != snake_length){
-                playerPosList -> removeTail();
-            }
+            playerPosList -> insertHead(*a);
+            playerPosList -> removeTail();
             break;
     }
     // PPA3 Finite State Machine logic
-}
-void Player::addlength(){
-    snake_length++;
-}
-void Player::dellength(){
-    snake_length--;
 }

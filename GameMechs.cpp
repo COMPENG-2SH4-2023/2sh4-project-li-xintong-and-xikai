@@ -23,21 +23,6 @@ GameMechs::GameMechs(int boardX, int boardY)
         boardSizeY = DEFAULT_SIZEY;
     }
 }
-GameMechs::GameMechs(GameMechs* clip_board){ //deep copy
-    boardSizeX = clip_board->boardSizeX;
-    boardSizeY = clip_board->boardSizeY;
-    if(clip_board->boardSizeX<=0){
-        boardSizeX=DEFAULT_SIZEX;
-    }
-    if(clip_board->boardSizeY<=0){
-        boardSizeY=DEFAULT_SIZEY;
-    }   
-}
-// do you need a destructor?
-GameMechs::~GameMechs(){
-    
-}
-
 
 bool GameMechs::getExitFlagStatus()
 {
@@ -71,13 +56,8 @@ void GameMechs::setExitTrue()
 }
 
 void GameMechs::setloseflagTrue()
-{
+{   
     loseflag = true;
-}
-void GameMechs::causeExitTrue(){
-    if(input == 'f'){
-        setExitTrue(); //call this funciton
-    }
 }
 
 void GameMechs::setInput(char this_input)
@@ -89,23 +69,3 @@ void GameMechs::clearInput()
 {
     input ='\0';
 }
-
-void GameMechs::generatefood(objPos blockOff)
-{
-    do
-    {
-        foodPos.x=rand()%(boardSizeX-2)+1;
-        foodPos.y=rand()%(boardSizeY-2)+1;
-        foodPos.symbol='@';
-    }
-    while(foodPos.x==blockOff.x&&foodPos.y==blockOff.y);
-    
-}
-
-void GameMechs::getFoodPos(objPos &returnPos)
-{
-    returnPos.x=foodPos.x;
-    returnPos.y=foodPos.y;
-    returnPos.symbol=foodPos.symbol;
-}
-

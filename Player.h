@@ -14,9 +14,7 @@ class Player
 
         void getPlayerPos(objPosArrayList &returnPosList); // Upgrade this in iteration 3.
         void updatePlayerDir(); //FSM
-        void movePlayer();//
-        void addlength();
-        void dellength();
+        void movePlayer();//class
 
     private:
         objPosArrayList* playerPosList;   // with player position and character of player   
@@ -25,7 +23,6 @@ class Player
         // Need a reference to the Main Game Mechanisms
         GameMechs* mainGameMechsRef; //包含着在程序运行中与其它的交互
 
-        int snake_length; //
         //主程序mainfunction 必须要与mainGameMechRef 交互
 };
 

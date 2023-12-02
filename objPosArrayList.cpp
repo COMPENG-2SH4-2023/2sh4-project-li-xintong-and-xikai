@@ -4,15 +4,15 @@
 using namespace std;
 
 objPosArrayList::objPosArrayList(){
-    sizeList =0;
+    sizeList = 0;
     sizeArray = ARRAY_MAX_CAP;
-    aList= new objPos [ARRAY_MAX_CAP];
+    aList = new objPos [ARRAY_MAX_CAP];
     
 }
 
 objPosArrayList::objPosArrayList(int sList,int sArray){
-    sizeList=sList;
-    sizeArray=sArray;
+    sizeList = sList;
+    sizeArray = sArray;
     aList=new objPos [sizeArray];
 
 }
@@ -28,7 +28,7 @@ objPosArrayList::~objPosArrayList(){
     delete [] aList;
 }
 int objPosArrayList::getSize(){
-    return sizeList;
+    return sizeList; 
 
 }
 void objPosArrayList::insertHead(objPos thisPos){

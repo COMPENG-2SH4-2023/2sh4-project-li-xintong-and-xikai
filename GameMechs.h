@@ -26,12 +26,10 @@ class GameMechs
     public:
         GameMechs();
         GameMechs(int boardX, int boardY);
-        GameMechs(GameMechs* clip_board);
-        ~GameMechs();
+        //~GameMechs();
         
         bool getExitFlagStatus();
         void setExitTrue();
-        void causeExitTrue();
 
         bool getloseflagStatus();
         void setloseflagTrue();
@@ -46,10 +44,6 @@ class GameMechs
 
         void scoreup();
         void scoredown();
-
-        void generatefood(objPos blockoff);
-        void getFoodPos(objPos &blockoff); //pass by reference, eventhough the block itself do not have the characteristic of the pointers/.
-
 };
 
 #endif
