@@ -11,8 +11,8 @@ Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct fu
     int init_length = 1;
     playerPosList = new objPosArrayList(init_length,ARRAY_MAX_CAP);
     objPos TEMP;
-    TEMP.setObjPos(thisGMRef->getBoardSizeX(),thisGMRef->getBoardSizeY(),'*'); //init 赋给头的特性，中场开始
-    playerPosList[0].insertHead(TEMP);
+    TEMP.setObjPos((thisGMRef->getBoardSizeX())/2,(thisGMRef->getBoardSizeY())/2,'*'); //init 赋给头的特性，中场开始
+    playerPosList -> insertHead(TEMP);
     mainGameMechsRef = thisGMRef;
 }
 
@@ -20,7 +20,7 @@ Player::~Player()
 {   
     //delete mainGameMechsRef; //only thing include private that might required to delete. //only thing include private that might required to delete.
     // delete any heap members here
-    delete  playerPosList;
+    delete [] playerPosList;
 }
 
 void Player::getPlayerPos(objPosArrayList &returnPosList) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.

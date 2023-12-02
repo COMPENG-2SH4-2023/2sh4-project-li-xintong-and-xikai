@@ -14,11 +14,12 @@ class Food{
         int foodposx;
         int foodposy;
         char food;
+        
     public:
         Food(GameMechs* thisgm);
         ~Food();
-        void generatefood(int x, int y);//inside maingamemech!
         void getFoodPos(objPos &returnPos);
+        void generatefood(int x, int y);//inside maingamemech!
         void getFoodbucket(objPosArrayList* Food_list);
 };
 #endif

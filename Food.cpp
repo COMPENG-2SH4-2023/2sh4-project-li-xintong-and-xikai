@@ -41,13 +41,6 @@ void Food::generatefood(int x,int y)
     while(foodposx >= x && foodposy >= y);
 }
 
-void Food::getFoodPos(objPos &returnPos)
-{
-    returnPos.x = foodposx;
-    returnPos.y = foodposy;
-    returnPos.symbol = food;
-}
-
 void Food::getFoodbucket(objPosArrayList* Food_list){
     Food_list = new objPosArrayList(*foodBucket);
 }
