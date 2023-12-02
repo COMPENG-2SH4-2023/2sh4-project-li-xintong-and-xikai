@@ -13,9 +13,9 @@ class Food{
         int foodposy;
         char food;
     public:
-        Food();
+        Food(GameMechs* thisgm);
         ~Food();
-        void generatefood(objPos blockOff);//inside maingamemech!
+        void generatefood(int x, int y);//inside maingamemech!
         void getFoodPos(objPos &returnPos);
 };
 #endif

@@ -3,6 +3,7 @@
 #include "objPos.h"
 #include "GameMechs.h"
 #include "Player.h"
+#include "Food.h"
 
 using namespace std;
 
@@ -16,15 +17,15 @@ void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
 void CleanUp(void);
-GameMechs *thisgm;
-Player *thisplayer;
-objPosArrayList *print_list;
-objPos *obj_for_print;
+GameMechs *thisgm; //initial the gamemech
+Player *thisplayer; //initial the player, the operation will cross the game
+Food *foodBucket; //initial the food
+objPosArrayList *print_list; //initial for print statement
 
 int main(void)
 {
     Initialize();
-    while(thisgm -> getExitFlagStatus() == false)  
+    while((thisgm -> getExitFlagStatus() == false) && (thisgm -> getloseflagStatus() == false))  //both elect on operator
     {
         GetInput();
         RunLogic();
@@ -40,7 +41,7 @@ void Initialize(void)
     thisgm = new GameMechs(30,15); //creat a new heap using class initialization
     thisplayer = new Player(thisgm);
     print_list = new objPosArrayList();
-    obj_for_print = new objPos();;
+    foodBucket = new Food(thisgm);
 }
 
 void GetInput(void)
@@ -54,6 +55,7 @@ void GetInput(void)
 
 void RunLogic(void)
 {
+    
     if(thisgm ->getInput() == 'f'){
         thisgm ->setExitTrue();
     }
@@ -66,7 +68,6 @@ void DrawScreen(void)
     thisplayer -> getPlayerPos(*print_list);  
     for(int y = 0; y < 16; y++){
         for(int x = 0; x < 31; x++){
-            print_list ->getElement(*obj_for_print,x);
             if(x == 0 || x == 30){
                 printf("#");
             }

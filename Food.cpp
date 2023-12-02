@@ -1,31 +1,52 @@
 #include "Food.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
+#include "Player.h"
+#include "GameMechs.h"
 
-Food::Food(){
-
-
+Food::Food(GameMechs* thisgm){
+    foodBucket = new objPosArrayList(5,5);
+    objPos *a = new objPos;
+    objPos *b = new objPos;
+    int x = thisgm ->getBoardSizeX();
+    int y = thisgm ->getBoardSizeY();
+    int counter;
+    do{
+        for (int i = 0; i < 5; i++){
+            generatefood(x,y);
+            a -> setObjPos(foodposx,foodposy,food);
+            foodBucket -> insertHead(*a);
+        }//after that will leave the last value
+        for(int j = 0; j < 4; j++){
+            foodBucket -> getElement(*b,j); //0-3
+            if(a ->isPosEqual(b)){
+                counter++;
+            }
+        }
+    }
+    while(counter == 4);
+    delete a,b;
 }
 
 Food::~Food(){
     delete foodBucket;
 }
-void Food::generatefood(objPos blockoff)
+void Food::generatefood(int x,int y)
 {  
-    
+
     do
     {
-        int foodPosx =(rand()%(blockoff.x)-2)+1;
-        int foodPosy =(rand()%(blockoff.y)-2)+1;
-        int foodPossymbol='*';
+        foodposx =(rand()%(x)-2)+1;
+        foodposy =(rand()%(y)-2)+1;
+        food = (rand()%94) + 33;
     }
-    while(foodPosx == blockoff.x && foodPosy==blockoff.y);
+    while(foodposx >= x && foodposy >= y);
     
 }
 
-void Food::getFoodPos(objPos &returnPos);
+void Food::getFoodPos(objPos &returnPos)//note the ;!
 {
-    returnPos.x=foodPos.x;
-    returnPos.y=foodPos.y;
-    returnPos.symbol=foodPos.symbol;
+    returnPos.x = foodposx;
+    returnPos.y = foodposy;
+    returnPos.symbol = food;
 }

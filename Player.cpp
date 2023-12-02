@@ -17,7 +17,7 @@ Player::~Player()
 {   
     //delete mainGameMechsRef; //only thing include private that might required to delete. //only thing include private that might required to delete.
     // delete any heap members here
-    delete [] playerPosList;
+    delete  playerPosList;
 }
 
 void Player::getPlayerPos(objPosArrayList &returnPosList) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.
