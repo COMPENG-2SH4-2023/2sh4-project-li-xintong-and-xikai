@@ -13,15 +13,32 @@ Food::Food(GameMechs* thisgm){
     objPos b ;
     int x = thisgm -> getBoardSizeX();
     int y = thisgm -> getBoardSizeY();
-    int counter = 0; //sick gpt 
-    for(int i = 0; i < 5; i++){
-        while((foodposx > x-1 || foodposy >y-1 )||(foodposx < 1 || foodposy < 1)){
-            generatefood(x,y);
-            a.setObjPos(foodposx,foodposy,food);
+    int counter = 0; //sick gpt
+    int counts=0;
+    int z;
 
-        }            
-        cout << a.x<<a.y<<a.symbol<<endl;
-        foodBucket ->insertHead(a);
+    while(counts<5){
+
+       
+        generatefood(x,y);
+        a.setObjPos(foodposx,foodposy,food);
+        for(z=0;z<5;z++)
+        {
+            foodBucket->getElement(b,z);
+            if(b.isPosEqual(&a))
+            {
+                break;
+            }
+        }
+        if(z==5)
+        {
+            foodBucket ->insertHead(a);
+        }
+        
+
+        
+       
+        
     }
 }
 
@@ -31,9 +48,13 @@ Food::~Food(){
 
 void Food::generatefood(int x,int y)
 {  
-    foodposx =(rand()%(x)-2)+1;
-    foodposy =(rand()%(y)-2)+1;
+
+    foodposx =rand()%(x-2)+1;
+    foodposy =rand()%(y-2)+1;
     food = (rand()%94) + 33;
+    
+    
+    
 }
 
 void Food::getFoodbucket(objPosArrayList &Food_list){

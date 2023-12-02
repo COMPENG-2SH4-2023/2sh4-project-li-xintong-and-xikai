@@ -7,6 +7,12 @@ objPosArrayList::objPosArrayList(){
     sizeList = 0;
     sizeArray = ARRAY_MAX_CAP;
     aList = new objPos [ARRAY_MAX_CAP];
+   /* for(int i=0; i<3; i++)
+    {
+        aList[i].x=15;
+        aList[i].y=7+i;
+        
+    }*/
     
 }
 
@@ -14,6 +20,7 @@ objPosArrayList::objPosArrayList(int sList,int sArray){
     sizeList = sList;
     sizeArray = sArray;
     aList=new objPos [sizeArray];
+    
 
 }
 
