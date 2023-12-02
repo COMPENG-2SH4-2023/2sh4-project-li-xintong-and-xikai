@@ -12,7 +12,6 @@ using namespace std;
 
 class GameMechs
 {
-
     private:
         objPos foodPos; //self_generated
         char input; //stock

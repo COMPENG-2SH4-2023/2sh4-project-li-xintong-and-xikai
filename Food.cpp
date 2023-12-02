@@ -3,14 +3,15 @@
 #include "objPosArrayList.h"
 #include "Player.h"
 #include "GameMechs.h"
+#include "MacUILib.h"
 
 Food::Food(GameMechs* thisgm){
     foodBucket = new objPosArrayList(5,5);
     objPos *a = new objPos;
     objPos *b = new objPos;
-    int x = thisgm ->getBoardSizeX();
+    int x = thisgm -> getBoardSizeX();
     int y = thisgm ->getBoardSizeY();
-    int counter;
+    int counter = 0; //sick gpt 
     do{
         for (int i = 0; i < 5; i++){
             generatefood(x,y);
@@ -33,7 +34,6 @@ Food::~Food(){
 }
 void Food::generatefood(int x,int y)
 {  
-
     do
     {
         foodposx =(rand()%(x)-2)+1;
@@ -41,7 +41,6 @@ void Food::generatefood(int x,int y)
         food = (rand()%94) + 33;
     }
     while(foodposx >= x && foodposy >= y);
-    
 }
 
 void Food::getFoodPos(objPos &returnPos)//note the ;!

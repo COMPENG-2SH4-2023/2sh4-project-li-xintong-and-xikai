@@ -4,6 +4,8 @@
 #include<iostream>
 #include "objPos.h"
 #include "objPosArrayList.h"
+#include "GameMechs.h"
+#include "Player.h"
 
 
 class Food{
