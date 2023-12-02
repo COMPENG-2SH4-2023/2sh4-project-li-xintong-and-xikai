@@ -8,11 +8,14 @@
 Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct function //can been seen as the initial construct function
 {
     myDir = STOP;
+
     int init_length = 1;
     playerPosList = new objPosArrayList(init_length,ARRAY_MAX_CAP);
+    
     objPos TEMP;
     TEMP.setObjPos((thisGMRef->getBoardSizeX())/2,(thisGMRef->getBoardSizeY())/2,'*'); //init 赋给头的特性，中场开始
     playerPosList -> insertHead(TEMP);
+
     mainGameMechsRef = thisGMRef;
 }
 
@@ -26,16 +29,12 @@ Player::~Player()
 void Player::getPlayerPos(objPosArrayList &returnPosList) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.
 {
     int a = playerPosList->getSize();
-    //returnPosList=new objPosArrayList(a,ARRAY_MAX_CAP);
     for(int i=0; (i < playerPosList -> getSize()); i++)
     {   
         objPos a;
         playerPosList->getElement(a,i);
         returnPosList.insertTail(a);
-        //returnPosList[i].aList->y = playerPosList[i].aList->y;
-        //returnPosList[i].aList->symbol = playerPosList[i].aList->symbol;
     }
-    // return the reference to the playerPos array list
 }
 
 void Player::updatePlayerDir() // CONNECTED WITH THE PLAY FUNCTION FIXED 
@@ -153,6 +152,7 @@ bool Player::checkfoodconsumption(objPosArrayList *food_list)
         return false;
     }
 }
+
 bool Player::checkselfcollision()
 {
     int a = playerPosList ->getSize();

@@ -39,16 +39,7 @@ char GameMechs::getInput()
     return input;
 }
 
-int GameMechs::getBoardSizeX()
-{
-    return boardSizeX;
-}
 
-
-int GameMechs::getBoardSizeY()
-{
-    return boardSizeY;
-}
 
 void GameMechs::setExitTrue()
 {
@@ -70,10 +61,20 @@ void GameMechs::clearInput()
     input ='\0';
 }
 
+//board size
+int GameMechs::getBoardSizeX()
+{
+    return boardSizeX;
+}
+int GameMechs::getBoardSizeY()
+{
+    return boardSizeY;
+}
+
+//score cat
 int GameMechs::getscore(){
     return score;
 }
-
 void GameMechs::scoreup(){
     score++;
 }

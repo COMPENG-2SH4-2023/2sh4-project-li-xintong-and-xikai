@@ -18,6 +18,7 @@ class Player
         void getPlayerPos(objPosArrayList &returnPosList); 
         void updatePlayerDir(); //FSM
         void movePlayer(objPosArrayList *food_list);//class
+        
 
         bool checkfoodconsumption(objPosArrayList *food_list);
         bool checkselfcollision();

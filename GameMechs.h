@@ -13,7 +13,6 @@ using namespace std;
 class GameMechs
 {
     private:
-        objPos foodPos; //self_generated
         char input; //stock
         bool exitFlag; //stock
         bool loseflag; //stock
@@ -26,24 +25,29 @@ class GameMechs
         GameMechs();
         GameMechs(int boardX, int boardY);
         //~GameMechs();
-        
-        bool getExitFlagStatus();
-        void setExitTrue();
 
+        //exit status 
+        void setExitTrue();
+        bool getExitFlagStatus();
+        
+        //loosing 
         bool getloseflagStatus();
         void setloseflagTrue();
 
-        char getInput();
+        //input part
         void setInput(char this_input);
-
+        char getInput();
         void clearInput();
 
+        //board size
         int getBoardSizeX();
         int getBoardSizeY();
 
+        //score cat
+        int getscore();
         void scoreup();
         void scoredown();
-        int getscore();
+        
 };
 
 #endif

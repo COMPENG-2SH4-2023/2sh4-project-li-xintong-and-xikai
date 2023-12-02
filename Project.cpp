@@ -17,7 +17,6 @@ void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
 void CleanUp(void);
-objPos pplayer;
 GameMechs *thisgm; //initial the gamemech
 Player *thisplayer; //initial the player, the operation will cross the game
 Food *foodBucket; //initial the food
@@ -42,8 +41,11 @@ void Initialize(void)
     thisgm = new GameMechs(30,15); //creat a new heap using class initialization
     thisplayer = new Player(thisgm);
     player_list = new objPosArrayList();
+
+
     foodBucket = new Food(thisgm);
-    foodBucket ->getFoodbucket(food_list);
+    food_list = new objPosArrayList();
+    foodBucket -> getFoodbucket(*food_list);
 
 }
 
@@ -51,13 +53,15 @@ void GetInput(void)
 {
    if(MacUILib_hasChar()){
         thisgm -> setInput(MacUILib_getChar());
-        
         thisplayer -> updatePlayerDir();
    }
 }
 
 void RunLogic(void)
 {
+    foodBucket = new Food(thisgm);
+    food_list = new objPosArrayList();
+    foodBucket -> getFoodbucket(*food_list);
     thisplayer ->getPlayerPos(*player_list);
     MacUILib_clearScreen();
     if(thisgm ->getInput() == 'f'){
@@ -68,6 +72,11 @@ void RunLogic(void)
 
 void DrawScreen(void)
 {
+    for(int i = 0 ; i < 5 ; i ++){
+        objPos a;
+        food_list ->getElement(a,i);
+        printf("%d,%d,%c\n",a.x,a.y,a.symbol);
+    }
     for(int y = 0; y < 16; y++){
         for(int x = 0; x < 31; x++){
             if(x == 0 || x == 30){
@@ -76,8 +85,11 @@ void DrawScreen(void)
             else if (y == 0 || y == 15){
                 printf("#");
             }
-            else if(player_list ->detect_to_print(x,y)){
+            else if(player_list -> detect_to_print(x,y)){
                 printf("*");
+            }
+            else if(food_list -> detect_to_print(x,y)){
+                printf("@");
             }
             else{
                 printf(" ");
@@ -90,7 +102,7 @@ void DrawScreen(void)
 
 void LoopDelay(void)
 {
-    MacUILib_Delay(DELAY_CONST); // 0.1s delay //DELAY_CONST
+    MacUILib_Delay(DELAY_CONST*0.01); // 0.1s delay //DELAY_CONST
 }
 
 

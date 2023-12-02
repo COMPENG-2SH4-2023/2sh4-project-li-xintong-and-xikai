@@ -4,43 +4,42 @@
 #include "GameMechs.h"
 
 Food::Food(GameMechs* thisgm){
+    printf("the food is ifinfish \n");
     foodBucket = new objPosArrayList(5,5);
-    objPos *a = new objPos;
-    objPos *b = new objPos;
+    foodposx = 0;
+    foodposy = 0;
+    food = '\0';
+    objPos a ;
+    objPos b ;
     int x = thisgm -> getBoardSizeX();
     int y = thisgm -> getBoardSizeY();
     int counter = 0; //sick gpt 
-    do{
-        for (int i = 0; i < 5; i++){
+    for(int i = 0; i < 5; i++){
+        while((foodposx > x-1 || foodposy >y-1 )||(foodposx < 1 || foodposy < 1)){
             generatefood(x,y);
-            a -> setObjPos(foodposx,foodposy,food);
-            foodBucket -> insertHead(*a);
-        }//after that will leave the last value
-        for(int j = 0; j < 4; j++){
-            foodBucket -> getElement(*b,j); //0-3
-            if(a ->isPosEqual(b)){
-                counter++;
-            }
-        }
+            a.setObjPos(foodposx,foodposy,food);
+
+        }            
+        cout << a.x<<a.y<<a.symbol<<endl;
+        foodBucket ->insertHead(a);
     }
-    while(counter == 4);
-    delete a,b;
 }
 
 Food::~Food(){
     delete foodBucket;
 }
+
 void Food::generatefood(int x,int y)
 {  
-    do
-    {
-        foodposx =(rand()%(x)-2)+1;
-        foodposy =(rand()%(y)-2)+1;
-        food = (rand()%94) + 33;
-    }
-    while(foodposx >= x && foodposy >= y);
+    foodposx =(rand()%(x)-2)+1;
+    foodposy =(rand()%(y)-2)+1;
+    food = (rand()%94) + 33;
 }
 
-void Food::getFoodbucket(objPosArrayList* Food_list){
-    Food_list = new objPosArrayList(*foodBucket);
+void Food::getFoodbucket(objPosArrayList &Food_list){
+    for(int i = 0; i < 5; i++){
+        objPos a;
+        foodBucket ->getElement(a,i);
+        Food_list.insertHead(a);
+    }
 }

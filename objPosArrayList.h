@@ -9,8 +9,8 @@ class objPosArrayList
 {
     private:
         objPos* aList;
-        int sizeList;
-        int sizeArray;
+        int sizeList; //snake length mapping
+        int sizeArray; //acutal snake body length
 
     public:
         objPosArrayList();
@@ -20,11 +20,14 @@ class objPosArrayList
         ~objPosArrayList();
 
         int getSize();
+        
+        //snake operation interact with snake 
         void insertHead(objPos thisPos);
         void insertTail(objPos thisPos);
         void removeHead();
         void removeTail();
         
+        //snake feature, using for snake 
         void getHeadElement(objPos &returnPos);
         void getTailElement(objPos &returnPos);
         void getElement(objPos &returnPos, int index);
@@ -37,7 +40,8 @@ class objPosArrayList
         int getTailx();
 
         int getTaily();
-
+        
+        //food and snake print 
         bool detect_to_print(int x, int y);
 };
 
