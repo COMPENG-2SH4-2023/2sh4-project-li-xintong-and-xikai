@@ -15,11 +15,39 @@ Food::~Food(){
 
 void Food::generatefood()
 {   
-    for(int i = 0; i < 5 ; i++){
-        tempfood.x =rand()%(boundx-2)+1;
-        tempfood.y =rand()%(boundy-2)+1;
-        tempfood.symbol = (rand()%94) + 33;  
-        foodBucket ->insertHead(tempfood); 
+    bool pass = false;
+    
+    while(!pass){
+        cout << "this syscle is calling" << endl;
+        for(int i = 0; i < 5 ; i++){
+            do{
+            tempfood.x =rand()%(boundx-2)+1;
+            tempfood.y =rand()%(boundy-2)+1;
+            tempfood.symbol = (rand()%94) + 33; 
+            }
+            while(tempfood.x < 2 || tempfood.y < 2); 
+            foodBucket -> insertHead(tempfood); 
+        }
+        for(int j = 0; j < 4 ; j++){
+            objPos reference1;
+            objPos reference2;
+            foodBucket -> getElement(reference1, j);
+            for(int k = j; k < 3 ;k++)
+            {
+                foodBucket -> getElement(reference2, k+1);
+                if(reference1.x == reference2.x && reference1.y == reference2.y)
+                {
+                    pass = false;
+                    for(int z = 0; z<5; z++)
+                    {
+                        foodBucket ->removeHead();
+                    }
+                }
+                else{
+                    pass = true;                    
+                }
+            }
+        }
     }
 }
 
