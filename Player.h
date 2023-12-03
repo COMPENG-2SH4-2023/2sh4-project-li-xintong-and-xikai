@@ -24,11 +24,14 @@ class Player
 
         void increasingsnake();
 
+        int getaward();
+
         GameMechs* getGM(GameMechs &GameMechs); //finish i/o perferal
     private:
         objPosArrayList* playerPosList;   
         enum Dir myDir;     
         GameMechs* mainGameMechsRef; 
+        int award;
 };
 
 #endif

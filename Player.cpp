@@ -16,6 +16,8 @@ Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct fu
     playerPosList -> insertHead(TEMP);
 
     mainGameMechsRef = thisGMRef;
+
+    award = 0;
 }
 
 Player::~Player()
@@ -130,13 +132,13 @@ bool Player::checkfoodconsumption(objPosArrayList &food_list){
             mainGameMechsRef -> scoreup(); 
             mainGameMechsRef -> scoreup(); 
             increasingsnake();
-            printf("1");
+            award = 1;
             return true;
         }
         else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol >=45 && TEMP_FOODPOS.symbol <70 ){
             mainGameMechsRef -> scoreup();
             increasingsnake();
-            printf("2");
+            award = 2;
             return true;
         }
         else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol == '!'){
@@ -145,19 +147,22 @@ bool Player::checkfoodconsumption(objPosArrayList &food_list){
             mainGameMechsRef -> scoreup();
             mainGameMechsRef -> scoreup();
             playerPosList ->removeTail();
-            printf("3");
+            award = 3;
             return true;
         }
         else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol == ')'){
             increasingsnake();
-            printf("4");
+            award = 4;
             return true;
         }
     }
-    printf("5");
+    award = 0;
     return false;
 }
 
+int Player::getaward(){
+    return award;
+}
 void Player::increasingsnake(){
     objPos head;
     playerPosList -> getHeadElement(head);

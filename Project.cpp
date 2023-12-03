@@ -95,6 +95,21 @@ void DrawScreen(void)
     }
     printf("Your current score is %d\n",thisgm -> getscore());
     printf("your current snake length is %d\n",printsnake.getSize());
+    if(snake -> getaward() == 0){
+        printf("you have not eat anything yet");
+    }
+    else if(snake -> getaward() == 1){
+        printf("you get 2 points and increase body");
+    }
+    else if(snake -> getaward() == 2){
+        printf("you get 1 points and increase body");
+    }
+    else if(snake -> getaward() == 3){
+        printf("you get 4 score and reduce body");
+    }
+    else if(snake -> getaward() == 4){
+        printf("you get 0 points but increase in body");
+    }
 }
 
 void LoopDelay(void)
