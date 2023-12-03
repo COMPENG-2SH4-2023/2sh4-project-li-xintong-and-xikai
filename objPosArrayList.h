@@ -11,6 +11,7 @@ class objPosArrayList
         objPos* aList;
         int sizeList; //snake length mapping
         int sizeArray; //acutal snake body length
+        int print_pos;//specific for print element position with same x and y value of the printer
 
     public:
         objPosArrayList();
@@ -32,17 +33,10 @@ class objPosArrayList
         void getTailElement(objPos &returnPos);
         void getElement(objPos &returnPos, int index);
 
-        //return the head x
-        int getHeadx();
-        //return the head y
-        int getHeady(); 
-
-        int getTailx();
-
-        int getTaily();
-        
         //food and snake print 
         bool detect_to_print(int x, int y);
+        //food and snake print element
+        char detect_get_char();
 };
 
 #endif

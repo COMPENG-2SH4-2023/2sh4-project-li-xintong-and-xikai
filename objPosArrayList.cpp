@@ -7,36 +7,24 @@ objPosArrayList::objPosArrayList(){
     sizeList = 0;
     sizeArray = ARRAY_MAX_CAP;
     aList = new objPos [ARRAY_MAX_CAP];
-   /* for(int i=0; i<3; i++)
-    {
-        aList[i].x=15;
-        aList[i].y=7+i;
-        
-    }*/
-    
 }
 
 objPosArrayList::objPosArrayList(int sList,int sArray){
     sizeList = sList;
     sizeArray = sArray;
     aList=new objPos [sizeArray];
-    
-
 }
 
 objPosArrayList::objPosArrayList(const objPosArrayList &ArrayList){
     sizeList=ArrayList.sizeList;
     sizeArray=ArrayList.sizeArray;
     aList=new objPos [ArrayList.sizeArray];
-
 }
 objPosArrayList::~objPosArrayList(){
-    
     delete [] aList;
 }
 int objPosArrayList::getSize(){
     return sizeList; 
-
 }
 void objPosArrayList::insertHead(objPos thisPos){
     if(sizeList==sizeArray)
@@ -76,8 +64,6 @@ void objPosArrayList::removeHead(){
         aList[i-1]=aList[i];
     }
     sizeList--;
-    
-
 }
 void objPosArrayList::removeTail(){
     if(sizeList==0)
@@ -90,17 +76,11 @@ void objPosArrayList::getHeadElement(objPos &returnPos){
     returnPos.symbol=aList[0].symbol;
     returnPos.x=aList[0].x;
     returnPos.y=aList[0].y;
-    
-
-
 }
 void objPosArrayList::getTailElement(objPos &returnPos){
     returnPos.symbol=aList[sizeList-1].symbol;
     returnPos.x=aList[sizeList-1].x;
     returnPos.y=aList[sizeList-1].y;
-
-
-
 }
 void objPosArrayList::getElement(objPos &returnPos, int index){
     returnPos.symbol=aList[index].symbol;
@@ -108,26 +88,17 @@ void objPosArrayList::getElement(objPos &returnPos, int index){
     returnPos.y=aList[index].y;
 }
 
-int objPosArrayList::getHeadx(){
-    return aList[0].x;
-}
-
-int objPosArrayList::getHeady(){
-    return aList[0].y;
-}
-int objPosArrayList::getTailx(){
-    return aList[sizeList].x;
-}
-int objPosArrayList::getTaily(){
-    return aList[sizeList].y;
-}
-
 bool objPosArrayList::detect_to_print(int x, int y){
 
     for(int z = 0 ; z < sizeList ; z++){   
         if(aList[z].x == x && aList[z].y == y){
+            print_pos = z;
             return true;
         }
     }
     return false;
+}
+
+char objPosArrayList::detect_get_char(){
+    return aList[print_pos].symbol;
 }

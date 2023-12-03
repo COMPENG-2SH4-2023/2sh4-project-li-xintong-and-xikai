@@ -14,6 +14,10 @@ GameMechs::GameMechs()
 
 GameMechs::GameMechs(int boardX, int boardY)
 {
+    input = 0;
+    score = 0;
+    exitFlag = false;
+    loseflag = false;
     boardSizeX = boardX;
     boardSizeY = boardY;
     if(boardX <= 0){
@@ -38,8 +42,6 @@ char GameMechs::getInput()
 {
     return input;
 }
-
-
 
 void GameMechs::setExitTrue()
 {

@@ -15,7 +15,6 @@ objPos::objPos(objPos &o) //deep copy pass by reference, give the value to the n
     symbol = o.symbol; //intake deep copy
 }
 
-
 objPos::objPos(int xPos, int yPos, char sym) //written the new element by manually input with the data
 {
     x = xPos;

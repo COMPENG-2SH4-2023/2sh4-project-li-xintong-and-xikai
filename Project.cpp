@@ -4,12 +4,8 @@
 #include "GameMechs.h"
 #include "Player.h"
 #include "Food.h"
-
 using namespace std;
-
 #define DELAY_CONST 100000
-
-bool exitFlag;
 
 void Initialize(void);
 void GetInput(void);
@@ -17,15 +13,13 @@ void RunLogic(void);
 void DrawScreen(void);
 void LoopDelay(void);
 void CleanUp(void);
-GameMechs *thisgm; //initial the gamemech
-Player *thisplayer; //initial the player, the operation will cross the game
-Food *foodBucket; //initial the food
-objPosArrayList *player_list, *food_list; //initial for print statement
-
+GameMechs *thisgm; //initial the gamemech on the heap, since it required to operate in the whole game! 
+Player *snake;
+Food *foodbasket;
 int main(void)
 {
     Initialize();
-    while(thisgm -> getExitFlagStatus())  //both elect on operator
+    while(!(thisgm ->getExitFlagStatus()))  //both elect on operator
     {
         GetInput();
         RunLogic();
@@ -35,48 +29,47 @@ int main(void)
     CleanUp();
 }
 
-
 void Initialize(void)
 {   
     thisgm = new GameMechs(30,15); //creat a new heap using class initialization
-    thisplayer = new Player(thisgm);
-    player_list = new objPosArrayList();
-
-
-    foodBucket = new Food(thisgm);
-    food_list = new objPosArrayList();
-    foodBucket -> getFoodbucket(*food_list);
-
+    snake = new Player(thisgm);
+    foodbasket = new Food(thisgm);
+    foodbasket -> generatefood();
 }
 
 void GetInput(void)
 {
-   if(MacUILib_hasChar()){
+    if(MacUILib_hasChar()){
         thisgm -> setInput(MacUILib_getChar());
-        thisplayer -> updatePlayerDir();
-   }
+    }
 }
 
 void RunLogic(void)
 {
-    foodBucket = new Food(thisgm);
-    food_list = new objPosArrayList();
-    foodBucket -> getFoodbucket(*food_list);
-    thisplayer ->getPlayerPos(*player_list);
-    MacUILib_clearScreen();
-    if(thisgm ->getInput() == 'f'){
+    if(thisgm -> getInput() == 'k'){
         thisgm ->setExitTrue();
     }
-    thisplayer -> movePlayer(food_list);
+    if(thisgm -> getInput() == 'l'){
+        snake ->increasingsnake();
+    }
+    snake ->updatePlayerDir();
+    snake ->movePlayer();
+    objPosArrayList foods;
+    foodbasket ->getFoodbucket(foods);
+    if(snake ->checkfoodconsumption(foods)){
+
+    } 
+    
 }
+
 
 void DrawScreen(void)
 {
-    for(int i = 0 ; i < 5 ; i ++){
-        objPos a;
-        food_list ->getElement(a,i);
-        printf("%d,%d,%c\n",a.x,a.y,a.symbol);
-    }
+    MacUILib_clearScreen();
+    objPosArrayList printsnake;
+    objPosArrayList printfoods;
+    snake -> getPlayerPos(printsnake);
+    foodbasket -> getFoodbucket(printfoods);
     for(int y = 0; y < 16; y++){
         for(int x = 0; x < 31; x++){
             if(x == 0 || x == 30){
@@ -85,11 +78,11 @@ void DrawScreen(void)
             else if (y == 0 || y == 15){
                 printf("#");
             }
-            else if(player_list -> detect_to_print(x,y)){
-                printf("*");
+            else if(printsnake.detect_to_print(x,y)){
+                printf("%c",printsnake.detect_get_char());
             }
-            else if(food_list -> detect_to_print(x,y)){
-                printf("@");
+            else if(printfoods.detect_to_print(x,y)){
+                printf("%c",printfoods.detect_get_char());
             }
             else{
                 printf(" ");
@@ -97,23 +90,26 @@ void DrawScreen(void)
         }
         printf("\n");
     }
-
+    printf("Your current score is %d\n",thisgm -> getscore());
+    printf("your current snake length is %d\n",printsnake.getSize());
 }
 
 void LoopDelay(void)
 {
-    MacUILib_Delay(DELAY_CONST*0.01); // 0.1s delay //DELAY_CONST
+    MacUILib_Delay(DELAY_CONST*0.1); // 0.1s delay //DELAY_CONST
 }
-
 
 void CleanUp(void)
 {   
     MacUILib_clearScreen();
-    delete thisplayer;
-    delete thisgm;     
-    MacUILib_uninit();
     if(thisgm ->getloseflagStatus()){
-        MacUILib_printf("ahahha loser!!!!!!!");
+        MacUILib_printf("ahahha loser!!!!!!!\n");
     }
-    MacUILib_printf("your final score is %d",thisgm ->getscore());
+    else{
+        MacUILib_printf("why exit?\n");
+    }
+    MacUILib_printf("your final score is %d\n",thisgm ->getscore());
+    delete thisgm;   
+    delete snake;
+    MacUILib_uninit();  
 }

@@ -10,16 +10,16 @@
 
 class Food{
     private:
-        objPosArrayList* foodBucket;
-        int foodposx;
-        int foodposy;
-        char food;
-        
+        objPosArrayList* foodBucket; //五个食物储存位置
+        objPos tempfood;
+        int boundx;
+        int boundy;
+
     public:
-        Food(GameMechs* thisgm);
+        Food(GameMechs* thisgm);//生成规避边境的食物，五个，并写回foodbucket里面！
+        
         ~Food();
-        void getFoodPos(objPos &returnPos);
-        void generatefood(int x, int y);//inside maingamemech!
+        void generatefood();//inside maingamemech! 
         void getFoodbucket(objPosArrayList &Food_list); //return food list 
 };
 #endif

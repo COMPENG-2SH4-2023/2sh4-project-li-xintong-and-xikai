@@ -24,7 +24,6 @@ class GameMechs
     public:
         GameMechs();
         GameMechs(int boardX, int boardY);
-        //~GameMechs();
 
         //exit status 
         void setExitTrue();
@@ -47,7 +46,6 @@ class GameMechs
         int getscore();
         void scoreup();
         void scoredown();
-        
 };
 
 #endif
