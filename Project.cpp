@@ -31,7 +31,7 @@ int main(void)
 
 void Initialize(void)
 {   
-    thisgm = new GameMechs(30,15); //creat a new heap using class initialization
+    thisgm = new GameMechs(30,15); //creat a borad with 30*15 size
     snake = new Player(thisgm);
     foodbasket = new Food(thisgm);
     foodbasket -> generatefood();
@@ -44,7 +44,7 @@ void GetInput(void)
     }
 }
 
-void RunLogic(void)
+void RunLogic(void)// snake status
 {
     if(thisgm -> getInput() == 'k'){
         thisgm -> setExitTrue();
@@ -72,7 +72,7 @@ void RunLogic(void)
 }
 
 
-void DrawScreen(void)
+void DrawScreen(void)  //printing process for the board and snake
 {
     MacUILib_clearScreen();
     objPosArrayList printsnake;
@@ -100,7 +100,7 @@ void DrawScreen(void)
         printf("\n");
     }
     printf("Your current score is %d\n",thisgm -> getscore());
-    printf("your current snake length is %d\n",printsnake.getSize());
+    printf("your current snake length is %d\n",printsnake.getSize());  //print the score status for eating different foods below
     if(snake -> getaward() == 0){
         printf("you have not eat anything yet");
     }
@@ -131,7 +131,7 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {   
-    MacUILib_clearScreen();
+    MacUILib_clearScreen();  //exit the game for the reason of winning, losing or anything else.
     if(thisgm ->getloseflagStatus() && (snake ->getaward() != 6)){
         printf("ahahha lose the game lolol\n");
     }

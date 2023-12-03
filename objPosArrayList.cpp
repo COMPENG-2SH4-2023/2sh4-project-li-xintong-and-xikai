@@ -26,7 +26,7 @@ objPosArrayList::~objPosArrayList(){
 int objPosArrayList::getSize(){
     return sizeList; 
 }
-void objPosArrayList::insertHead(objPos thisPos){
+void objPosArrayList::insertHead(objPos thisPos){  
     if(sizeList==sizeArray)
     {
         return;
@@ -88,7 +88,7 @@ void objPosArrayList::getElement(objPos &returnPos, int index){
     returnPos.y=aList[index].y;
 }
 
-bool objPosArrayList::detect_to_print(int x, int y){
+bool objPosArrayList::detect_to_print(int x, int y){   //get a bool to make the printing porcess convenient
 
     for(int z = 0 ; z < sizeList ; z++){   
         if(aList[z].x == x && aList[z].y == y){

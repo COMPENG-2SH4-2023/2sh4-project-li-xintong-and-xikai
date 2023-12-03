@@ -31,7 +31,7 @@ class Player
         objPosArrayList* playerPosList;   
         enum Dir myDir;     
         GameMechs* mainGameMechsRef; 
-        int award;
+        int award; //score
 };
 
 #endif

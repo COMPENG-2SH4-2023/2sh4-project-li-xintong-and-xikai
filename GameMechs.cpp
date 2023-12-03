@@ -2,7 +2,7 @@
 #define DEFAULT_SIZEX 30
 #define DEFAULT_SIZEY 15
 
-GameMechs::GameMechs()
+GameMechs::GameMechs()     //default constructor
 {
     input = 0;
     score = 0;
@@ -12,7 +12,7 @@ GameMechs::GameMechs()
     boardSizeY = DEFAULT_SIZEX;
 }
 
-GameMechs::GameMechs(int boardX, int boardY)
+GameMechs::GameMechs(int boardX, int boardY)    //additional constructor
 {
     input = 0;
     score = 0;

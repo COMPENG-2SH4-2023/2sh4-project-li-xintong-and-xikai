@@ -10,17 +10,16 @@
 
 class Food{
     private:
-        objPosArrayList* foodBucket; //五个食物储存位置 notice: 由外部构建pointer同时改变内部的值将会改变外部嘛？
+        objPosArrayList* foodBucket; //the list of five food 
         
         objPos tempfood;
         int boundx;
         int boundy;
 
     public:
-        Food(GameMechs* thisgm);//生成规避边境的食物，五个，并写回foodbucket里面！
-        
+        Food(GameMechs* thisgm);//constructor that creates a bucket for 5 food and gives the boundary of food.
         ~Food();
-        void generatefood();//inside maingamemech! 
+        void generatefood();//create 5 food, make sure that they  are in the correct region and check it whether they are repetitive or not.
         void getFoodbucket(objPosArrayList &Food_list); //return food list 
 };
 #endif
