@@ -10,7 +10,8 @@
 
 class Food{
     private:
-        objPosArrayList* foodBucket; //五个食物储存位置
+        objPosArrayList* foodBucket; //五个食物储存位置 notice: 由外部构建pointer同时改变内部的值将会改变外部嘛？
+        
         objPos tempfood;
         int boundx;
         int boundy;

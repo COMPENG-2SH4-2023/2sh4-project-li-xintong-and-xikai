@@ -26,7 +26,7 @@ class Player
 
         int getaward();
 
-        GameMechs* getGM(GameMechs &GameMechs); //finish i/o perferal
+        //GameMechs* getGM(GameMechs &GameMechs); //finish i/o perferal
     private:
         objPosArrayList* playerPosList;   
         enum Dir myDir;     

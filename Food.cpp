@@ -23,7 +23,7 @@ void Food::generatefood()
             do{
             tempfood.x =rand()%(boundx-2)+1;
             tempfood.y =rand()%(boundy-2)+1;
-            tempfood.symbol = (rand()%94) + 33; 
+            tempfood.symbol = (rand()%93) + 33; //do not have ' '
             }
             while(tempfood.x < 2 || tempfood.y < 2); 
             foodBucket -> insertHead(tempfood); 

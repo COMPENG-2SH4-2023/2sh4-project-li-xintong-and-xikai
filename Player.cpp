@@ -128,20 +128,20 @@ bool Player::checkfoodconsumption(objPosArrayList &food_list){
     playerPosList -> getHeadElement(playerPOS);
     for(int i = 0; i < 5 ; i++){
         food_list.getElement(TEMP_FOODPOS,i);
-        if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol >=70 ){
+        if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol >= 123){
             mainGameMechsRef -> scoreup(); 
             mainGameMechsRef -> scoreup(); 
             increasingsnake();
             award = 1;
             return true;
         }
-        else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol >=45 && TEMP_FOODPOS.symbol <70 ){
+        else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol >= 61 && TEMP_FOODPOS.symbol < 123){
             mainGameMechsRef -> scoreup();
             increasingsnake();
             award = 2;
             return true;
         }
-        else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol == '!'){
+        else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol >= 41 && TEMP_FOODPOS.symbol < 61){
             mainGameMechsRef -> scoreup();
             mainGameMechsRef -> scoreup();
             mainGameMechsRef -> scoreup();
@@ -150,10 +150,23 @@ bool Player::checkfoodconsumption(objPosArrayList &food_list){
             award = 3;
             return true;
         }
-        else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol == ')'){
+        else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol >= 35 && TEMP_FOODPOS.symbol < 41){
             increasingsnake();
             award = 4;
             return true;
+        }
+        else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol == 34){
+            award = 5;
+            for(int i = 0 ; i < 10 ; i++){
+                increasingsnake();
+                mainGameMechsRef -> scoreup();
+            }
+            return true;
+        }
+        else if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol == 33){
+            award = 6;
+            return true;
+            mainGameMechsRef -> setExitTrue();
         }
     }
     award = 0;
@@ -184,6 +197,7 @@ bool Player::checkselfcollision()
     return false;
 }
 
+/*
 GameMechs* Player::getGM(GameMechs &GameMechs){
     return mainGameMechsRef;
-}
+}*/

@@ -50,7 +50,7 @@ void RunLogic(void)
         thisgm -> setExitTrue();
     }
     if(thisgm -> getInput() == 'l'){
-        snake ->increasingsnake();
+        snake -> increasingsnake();
     }
     snake ->updatePlayerDir();
     snake ->movePlayer();
@@ -62,6 +62,12 @@ void RunLogic(void)
     if(snake -> checkselfcollision()){
         thisgm -> setloseflagTrue();
         thisgm -> setExitTrue();
+    }
+    objPosArrayList snakebody;
+    snake -> getPlayerPos(snakebody);
+    if(snakebody.getSize() == 0){
+        thisgm -> setloseflagTrue();
+        thisgm -> setExitTrue();  
     }
 }
 
@@ -110,18 +116,27 @@ void DrawScreen(void)
     else if(snake -> getaward() == 4){
         printf("you get 0 points but increase in body");
     }
+    else if(snake -> getaward() == 5){
+        printf("what out !");
+    }
+    else if(snake -> getaward() == 6){
+        printf("haha it is a boom!!!!!!!!!");
+    }
 }
 
 void LoopDelay(void)
 {
-    MacUILib_Delay(DELAY_CONST*0.1); // 0.1s delay //DELAY_CONST
+    MacUILib_Delay(DELAY_CONST); // 0.1s delay //DELAY_CONST
 }
 
 void CleanUp(void)
 {   
     MacUILib_clearScreen();
-    if(thisgm ->getloseflagStatus()){
-        printf("ahahha loser!!!!!!!\n");
+    if(thisgm ->getloseflagStatus() && (snake ->getaward() != 6)){
+        printf("ahahha lose the game lolol\n");
+    }
+    else if(thisgm ->getloseflagStatus()&& (snake ->getaward() == 6)){
+        printf("you get the boom!!!!!");
     }
     else{
         printf("why exit?\n");
@@ -129,5 +144,6 @@ void CleanUp(void)
     printf("your final score is %d\n",thisgm ->getscore());
     delete thisgm;   
     delete snake;
+    delete foodbasket;
     MacUILib_uninit();  
 }
