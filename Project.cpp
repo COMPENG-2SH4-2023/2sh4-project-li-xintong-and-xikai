@@ -47,7 +47,7 @@ void GetInput(void)
 void RunLogic(void)
 {
     if(thisgm -> getInput() == 'k'){
-        thisgm ->setExitTrue();
+        thisgm -> setExitTrue();
     }
     if(thisgm -> getInput() == 'l'){
         snake ->increasingsnake();
@@ -57,9 +57,12 @@ void RunLogic(void)
     objPosArrayList foods;
     foodbasket ->getFoodbucket(foods);
     if(snake ->checkfoodconsumption(foods)){
-
+        foodbasket -> generatefood();
     } 
-    
+    if(snake -> checkselfcollision()){
+        thisgm -> setloseflagTrue();
+        thisgm -> setExitTrue();
+    }
 }
 
 
@@ -103,12 +106,12 @@ void CleanUp(void)
 {   
     MacUILib_clearScreen();
     if(thisgm ->getloseflagStatus()){
-        MacUILib_printf("ahahha loser!!!!!!!\n");
+        printf("ahahha loser!!!!!!!\n");
     }
     else{
-        MacUILib_printf("why exit?\n");
+        printf("why exit?\n");
     }
-    MacUILib_printf("your final score is %d\n",thisgm ->getscore());
+    printf("your final score is %d\n",thisgm ->getscore());
     delete thisgm;   
     delete snake;
     MacUILib_uninit();  

@@ -168,7 +168,7 @@ bool Player::checkselfcollision()
 {
     objPos head;
     objPos body;
-    for(int i = 2 ;(i < playerPosList -> getSize()); i++)
+    for(int i = 3 ;(i < playerPosList -> getSize()); i++)
     {
         playerPosList -> getHeadElement(head);
         playerPosList -> getElement(body,i);
