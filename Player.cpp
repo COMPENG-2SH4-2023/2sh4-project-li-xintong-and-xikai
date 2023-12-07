@@ -12,22 +12,22 @@ Player::Player(GameMechs* thisGMRef) //can been seen as the initial construct fu
     playerPosList = new objPosArrayList();
     
     objPos TEMP;
-    TEMP.setObjPos((thisGMRef->getBoardSizeX())/2,(thisGMRef->getBoardSizeY())/2,'*'); //init 赋给头的特性，中场开始
+    TEMP.setObjPos((thisGMRef->getBoardSizeX())/2,(thisGMRef->getBoardSizeY())/2,'*'); //create the snake head to begin at the centre of the board
     playerPosList -> insertHead(TEMP);
 
     mainGameMechsRef = thisGMRef;
 
-    award = 0;
+    award = 0;  //score
 }
 
 Player::~Player()
 {   
-    //delete mainGameMechsRef; //only thing include private that might required to delete. //only thing include private that might required to delete.
+    
     // delete any heap members here
     delete playerPosList;
 }
 
-void Player::getPlayerPos(objPosArrayList &returnPosList) //the snake head location, always print add very beginning first of the element. //the snake head location, always print add very beginning first of the element.
+void Player::getPlayerPos(objPosArrayList &returnPosList) //the snake head location, always print add very beginning first of the element. 
 {
     int a = playerPosList -> getSize();
     for(int i=0; (i < playerPosList -> getSize()); i++)
@@ -71,16 +71,17 @@ void Player::updatePlayerDir() // CONNECTED WITH THE PLAY FUNCTION FIXED
     mainGameMechsRef -> clearInput();       
 }
 
-void Player::movePlayer() //fixed  //fixed 
+void Player::movePlayer()  
 {
     //myDir from input of analysitic 
     objPos a; //calculate the head position
     playerPosList -> getHeadElement(a);
-
+    //movement for the snake
+    //move the snake by add a head and remove a tail
     switch(myDir){
         
         case UP:
-            //playerPosList -> getElement(a,0);
+
             a.y--;
             if(a.y == 0){
                 a.y = (mainGameMechsRef -> getBoardSizeY()) - 1;
@@ -89,8 +90,7 @@ void Player::movePlayer() //fixed  //fixed
             playerPosList -> removeTail();
             break;
         case DOWN:
-            //objPos b;
-            //playerPosList -> getElement(b,0);
+
             a.y++;
             if(a.y == mainGameMechsRef->getBoardSizeY()){
                 a.y = 1;
@@ -99,8 +99,7 @@ void Player::movePlayer() //fixed  //fixed
             playerPosList -> removeTail();
             break;
         case LEFT:
-            //objPos c;
-            //playerPosList -> getElement(c,0);
+
             a.x--;
             
             if(a.x == 0){
@@ -119,15 +118,16 @@ void Player::movePlayer() //fixed  //fixed
             playerPosList -> removeTail();
             break;
     }
-    // PPA3 Finite State Machine logic
+   
 }
 
 bool Player::checkfoodconsumption(objPosArrayList &food_list){
-    objPos playerPOS;
+    objPos playerPOS;    //identify the food is eaten by the snake and control the change of length and score for the snake
     objPos TEMP_FOODPOS;
     playerPosList -> getHeadElement(playerPOS);
     for(int i = 0; i < 5 ; i++){
         food_list.getElement(TEMP_FOODPOS,i);
+        //different foods with different effects (normal food and special food)
         if(TEMP_FOODPOS.isPosEqual(&playerPOS)&&TEMP_FOODPOS.symbol >= 123){
             mainGameMechsRef -> scoreup(); 
             mainGameMechsRef -> scoreup(); 
@@ -182,7 +182,7 @@ void Player::increasingsnake(){
     playerPosList -> insertHead(head);
 }
 
-bool Player::checkselfcollision()
+bool Player::checkselfcollision()  //check the condition of suicide by compare the pos of head with pos with bodies
 {
     objPos head;
     objPos body;
@@ -197,7 +197,3 @@ bool Player::checkselfcollision()
     return false;
 }
 
-/*
-GameMechs* Player::getGM(GameMechs &GameMechs){
-    return mainGameMechsRef;
-}*/
